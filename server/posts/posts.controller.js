@@ -7,6 +7,9 @@ const postService = require("./post.service");
 
 router.get("/", getAllPost);
 router.get("/typhoon", getAllTyphoonPosts);
+router.get("/fire", getAllFirePosts);
+router.get("/earthquake", getAllEarthquakePosts);
+router.get("/crimes", getAllCrimePosts);
 
 //ilagay mo sa taas ng /:id yung mga endpoints mo kasi yun yung rule
 
@@ -40,7 +43,24 @@ function getAllTyphoonPosts(req, res, next) {
     .then((posts) => res.json(posts))
     .catch((err) => next(err));
 }
-
+function getAllFirePosts(req, res, next) {
+  postService
+    .getAllFirePosts()
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
+}
+function getAllEarthquakePosts(req, res, next) {
+  postService
+    .getAllEarthquakePosts()
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
+}
+function getAllCrimePosts(req, res, next) {
+  postService
+    .getAllCrimePosts()
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
+}
 function createPost(req, res, next) {
   postService
     .createPost(req.body, req.user.sub)
