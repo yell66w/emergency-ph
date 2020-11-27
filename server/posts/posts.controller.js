@@ -6,6 +6,10 @@ const postService = require("./post.service");
 // routes
 
 router.get("/", getAllPost);
+router.get("/typhoon", getAllTyphoonPosts);
+
+//ilagay mo sa taas ng /:id yung mga endpoints mo kasi yun yung rule
+
 router.get("/:id", getPostById);
 router.get("/popular", getAllPostsByPopularity);
 // router.get('/lastest', getAllsortBydatecreated);
@@ -13,6 +17,7 @@ router.get("/popular", getAllPostsByPopularity);
 router.post("/create", createPost);
 router.put("/:id", updatePost);
 router.delete("/:id", deletePost);
+router.delete("/", deleteAllPosts);
 
 module.exports = router;
 
@@ -26,6 +31,12 @@ function getAllPostsByPopularity(req, res, next) {
 function getAllPost(req, res, next) {
   postService
     .getAllPost()
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
+}
+function getAllTyphoonPosts(req, res, next) {
+  postService
+    .getAllTyphoonPosts()
     .then((posts) => res.json(posts))
     .catch((err) => next(err));
 }
@@ -57,6 +68,13 @@ function updatePost(req, res, next) {
 function deletePost(req, res, next) {
   postService
     .deletePost(req.params.id)
+    .then(() => res.json({}))
+    .catch((err) => next(err));
+}
+
+function deleteAllPosts(req, res, next) {
+  postService
+    .deleteAllPosts()
     .then(() => res.json({}))
     .catch((err) => next(err));
 }

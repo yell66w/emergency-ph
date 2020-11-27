@@ -15,10 +15,16 @@ module.exports = {
   createPost,
   updatePost,
   deletePost,
+  getAllTyphoonPosts,
+  deleteAllPosts,
 };
 
 async function getAllPost() {
   return await Post.find();
+}
+async function getAllTyphoonPosts() {
+  return await Post.find({ category: "TYPHOON" });
+  // return await { message: "working" };
 }
 
 async function getPostById(id) {
@@ -35,6 +41,8 @@ async function createPost(userParam, userid) {
   const post = new Post({
     user_id: userData._id,
     user_name: userData.username,
+    user_first_name: userData.firstName,
+    user_last_name: userData.lastName,
     upvotes: 0,
     status: userParam.status,
     post_title: userParam.title,
@@ -83,4 +91,7 @@ async function updatePost(id, userParam) {
 
 async function deletePost(id) {
   await Post.findByIdAndRemove(id);
+}
+async function deleteAllPosts() {
+  await Post.remove({});
 }
