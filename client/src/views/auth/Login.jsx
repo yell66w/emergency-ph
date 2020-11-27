@@ -47,8 +47,8 @@ const Login = ({ setShowSignIn, setIsAuth, setCheckingUser }) => {
           className="flex flex-col justify-center items-center h-full"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <h1 className="text-4xl font-bold  text-blue-500 ">
-            Sign in to Chihuahua
+          <h1 className="text-4xl font-bold  text-red-500 ">
+            Sign in to EmergencyPH
           </h1>
           <p className="text-xs text-gray-500 mt-6">
             To keep connected with us please login with your personal info
@@ -90,7 +90,7 @@ const Login = ({ setShowSignIn, setIsAuth, setCheckingUser }) => {
           </a>
 
           <button
-            className="transition duration-500 w-48 flex justify-center ease-in-out focus:bg-blue-600 bg-blue-500 focus:outline-none hover:bg-blue-600 mt-9 cursor-pointer text-white font-semibold tracking-widest px-16 py-3 rounded-full text-sm"
+            className="transition duration-500 w-48 flex justify-center ease-in-out focus:bg-red-600 bg-red-500 focus:outline-none hover:bg-red-600 mt-9 cursor-pointer text-white font-semibold tracking-widest px-16 py-3 rounded-full text-sm"
             type="submit"
           >
             {isSubmitting ? (
@@ -106,7 +106,7 @@ const Login = ({ setShowSignIn, setIsAuth, setCheckingUser }) => {
         initial={{ x: -1000 }}
         animate={{ x: 0 }}
         transition={{ ease: "easeOut", duration: 0.5 }}
-        className="flex w-1/3 flex-col bg-gradient-to-br from-blue-500 to-purple-600 min-h-screen h-full text-white justify-center items-center"
+        className="flex w-1/3 flex-col bg-gradient-to-br from-red-500 to-red-600 min-h-screen h-full text-white justify-center items-center"
       >
         <h1 className="text-4xl font-bold">Hello, Friend!</h1>
 
@@ -116,7 +116,7 @@ const Login = ({ setShowSignIn, setIsAuth, setCheckingUser }) => {
 
         <input
           onClick={() => setShowSignIn(false)}
-          className="transition duration-500 ease-in-out hover:bg-white hover:text-blue-500 bg-transparent border border-white focus:outline-none mt-9 cursor-pointer text-white font-semibold tracking-widest px-16 py-3 rounded-full text-sm"
+          className="transition duration-500 ease-in-out hover:bg-white hover:text-red-500 bg-transparent border border-white focus:outline-none mt-9 cursor-pointer text-white font-semibold tracking-widest px-16 py-3 rounded-full text-sm"
           type="submit"
           value="SIGN UP"
         />

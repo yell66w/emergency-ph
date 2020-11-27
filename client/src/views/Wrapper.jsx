@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AuthService } from "../services/AuthService";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
-import Main from "./home/Main";
+import Routes from "./main/Routes";
 import Loading from "./loading/Loading";
 
 const Wrapper = () => {
@@ -28,7 +28,7 @@ const Wrapper = () => {
     return <Loading desc={"Loading"} />;
   } else {
     return isAuth ? (
-      <Main
+      <Routes
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         setCheckingUser={setCheckingUser}

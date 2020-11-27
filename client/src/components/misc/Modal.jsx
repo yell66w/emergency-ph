@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactModal from "react-modal";
 
 ReactModal.setAppElement("#root");

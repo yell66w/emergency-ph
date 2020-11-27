@@ -19,7 +19,9 @@ const Appbar = ({ onSignOut, currentUser }) => {
 
   return (
     <div className="shadow h-16 flex tracking-wider items-center px-6 text-gray-800 ">
-      <h1 className="font-bold  text-lg">EMERGENCY</h1>
+      <h1 className="font-bold text-red-600  text-lg">
+        <span className="text-gray-800">Emergency</span>PH
+      </h1>
       <div className="ml-4 w-full">
         <input
           className="bg-gray-200 text-xs font-medium rounded-full px-4 py-3 w-64 focus:outline-none"
@@ -39,30 +41,27 @@ const Appbar = ({ onSignOut, currentUser }) => {
             className="text-red-600 cursor-pointer"
           />
           {isNotificationOpen ? (
-            <div class="origin-top-right absolute right-24 top-12 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+            <div class="origin-top-right absolute right-24 top-12 mt-2 w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
               <div
                 class="py-1"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="options-menu"
               >
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                <div
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-default"
                   role="menuitem"
                 >
                   Notifications
-                </a>
+                </div>
 
-                <form method="POST" action="#">
-                  <button
-                    type="submit"
-                    class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
-                    role="menuitem"
-                  >
-                    Sign out
-                  </button>
-                </form>
+                <button
+                  type="submit"
+                  class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
+                  role="menuitem"
+                >
+                  Ryan wants to connect with you
+                </button>
               </div>
             </div>
           ) : null}
@@ -82,13 +81,12 @@ const Appbar = ({ onSignOut, currentUser }) => {
                 aria-orientation="vertical"
                 aria-labelledby="options-menu"
               >
-                <a
-                  href="#"
+                <div
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                   role="menuitem"
                 >
                   Account settings
-                </a>
+                </div>
 
                 <button
                   onClick={onSignOut}
