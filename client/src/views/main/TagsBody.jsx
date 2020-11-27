@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import Modal from "../../components/misc/Modal";
 import Post from "../../components/posts/Post";
@@ -5,12 +6,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { postSchema } from "../../models/PostSchema";
 import Spinner from "react-spinners/MoonLoader";
-import { PostService } from "../../services/PostService";
-import SortTab from "../../components/misc/SortTab";
 import CreatePost from "../../components/misc/CreatePost";
+import SortTab from "../../components/misc/SortTab";
+import { TagService } from "../../services/TagService";
 
-const CrimesBody = ({ currentUser }) => {
-  const _post = new PostService();
+const TagsBody = ({ currentUser }) => {
+  let { tag } = useParams();
+
+  const _tags = new TagService();
   const [posts, setPosts] = useState([]);
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(postSchema),
@@ -24,7 +27,7 @@ const CrimesBody = ({ currentUser }) => {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
-      await _post.createPost(data);
+      await _tags.createPost(data);
       setPostUpdated(true);
       setShowModal(false);
     } catch (error) {
@@ -36,16 +39,17 @@ const CrimesBody = ({ currentUser }) => {
   useEffect(() => {
     const getAllPosts = async () => {
       setIsLoading(true);
-      const posts = await _post.getAllCrimePosts();
-      console.log(posts);
-      setPosts(posts);
+      const posts = await _tags.getAllPostsByTagByName(tag);
+      if (posts.length > 0) {
+        setPosts(posts);
+      }
       setIsLoading(false);
       setPostUpdated(false);
     };
-    if (postUpdated) {
+    if (postUpdated || tag) {
       getAllPosts();
     }
-  }, [postUpdated]);
+  }, [postUpdated, tag]);
 
   return (
     <>
@@ -58,11 +62,11 @@ const CrimesBody = ({ currentUser }) => {
             <div className="flex items-center justify-center h-full min-h-screen ">
               <Spinner />
             </div>
-          ) : (
+          ) : posts != undefined || posts != null ? (
             posts.map((post) => {
-              return <Post key={post.id} post={post} />;
+              return <Post key={post._id} post={post} />;
             })
-          )}
+          ) : null}
         </div>
       </div>
       {/* Modal */}
@@ -127,4 +131,4 @@ const CrimesBody = ({ currentUser }) => {
   );
 };
 
-export default CrimesBody;
+export default TagsBody;

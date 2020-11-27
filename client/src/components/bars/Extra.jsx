@@ -1,11 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import VolunteerExtra from "../misc/VolunteerExtra";
-
+import Hashtag from "../misc/Hashtag";
+import { TagService } from "../../services/TagService";
+import Loader from "react-spinners/MoonLoader";
 const Extra = () => {
+  const [trendingTags, setTrendingTags] = useState([]);
+  const _tags = new TagService();
+  const [isLoadingTags, setIsLoadingTags] = useState(true);
+
+  useEffect(() => {
+    const getTrendingTags = async () => {
+      setIsLoadingTags(true);
+      try {
+        const res = await _tags.getPopularTags();
+        setTrendingTags(res);
+      } catch (error) {
+      } finally {
+        setIsLoadingTags(false);
+      }
+    };
+    getTrendingTags();
+  }, []);
   return (
     <div className="w-1/5 bg-brown-500 shadow ">
       <div className=" px-4 py-4 ">
-        <div className="text-sm">
+        <div className="text-sm ">
+          <h1 className="text-xl font-bold border-b mb-4">TRENDING</h1>
+          <div className="flex flex-row flex-wrap">
+            {isLoadingTags ? (
+              <div className="flex items-center justify-center  w-full">
+                <Loader size={30} />
+              </div>
+            ) : (
+              trendingTags.map((tag) => {
+                return <Hashtag id={tag.id} key={tag.id} name={tag.tag} />;
+              })
+            )}
+          </div>
+        </div>
+        <div className="text-sm mt-4">
           <h1 className="text-xl font-bold border-b mb-4">HOTLINES</h1>
           <p className="mb-2">
             <span className="font-bold">EMERGENCY HOTLINE</span> - 911

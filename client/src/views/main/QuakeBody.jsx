@@ -6,10 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { postSchema } from "../../models/PostSchema";
 import Spinner from "react-spinners/MoonLoader";
 import { PostService } from "../../services/PostService";
-import SortTab from "../../components/misc/SortTab";
 import CreatePost from "../../components/misc/CreatePost";
+import SortTab from "../../components/misc/SortTab";
 
-const CrimesBody = ({ currentUser }) => {
+const QuakeBody = ({ currentUser }) => {
   const _post = new PostService();
   const [posts, setPosts] = useState([]);
   const { register, handleSubmit, errors } = useForm({
@@ -36,7 +36,7 @@ const CrimesBody = ({ currentUser }) => {
   useEffect(() => {
     const getAllPosts = async () => {
       setIsLoading(true);
-      const posts = await _post.getAllCrimePosts();
+      const posts = await _post.getAllQuakePosts();
       console.log(posts);
       setPosts(posts);
       setIsLoading(false);
@@ -127,4 +127,4 @@ const CrimesBody = ({ currentUser }) => {
   );
 };
 
-export default CrimesBody;
+export default QuakeBody;

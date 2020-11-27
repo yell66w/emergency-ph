@@ -11,6 +11,9 @@ import HomeBody from "./HomeBody";
 import TyphoonBody from "./TyphoonBody";
 import CrimesBody from "./CrimesBody";
 import Error404 from "./Error404";
+import FireBody from "./FireBody";
+import QuakeBody from "./QuakeBody";
+import TagsBody from "./TagsBody";
 
 const Main = ({ setIsAuth, setCheckingUser, currentUser, setCurrentUser }) => {
   const _auth = new AuthService();
@@ -38,13 +41,22 @@ const Main = ({ setIsAuth, setCheckingUser, currentUser, setCurrentUser }) => {
               <HomeBody currentUser={currentUser} />
             </Route>
             <Route exact path="/typhoon">
-              <TyphoonBody />
+              <TyphoonBody currentUser={currentUser} />
+            </Route>
+            <Route exact path="/fire">
+              <FireBody currentUser={currentUser} />
+            </Route>
+            <Route exact path="/earthquake">
+              <QuakeBody currentUser={currentUser} />
             </Route>
             <Route exact path="/crimes">
-              <CrimesBody />
+              <CrimesBody currentUser={currentUser} />
+            </Route>
+            <Route exact path="/t/:tag">
+              <TagsBody currentUser={currentUser} />
             </Route>
             <Route path="/*">
-              <Error404 />
+              <Error404 currentUser={currentUser} />
             </Route>
           </Switch>
           <Extra currentUser={currentUser} />

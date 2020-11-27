@@ -3,7 +3,19 @@ import Hashtag from "../misc/Hashtag";
 import bagyo from "../../assets/img/bagyo.jpg";
 import { MdThumbUp } from "react-icons/md";
 
-const Post = () => {
+const Post = ({ post }) => {
+  const {
+    user_id,
+    user_first_name,
+    user_last_name,
+    user_name,
+    category,
+    post_description,
+    tags,
+    photos,
+    status,
+    upvotes,
+  } = post;
   return (
     <div className="bg-white shadow rounded-lg flex flex-col mb-2 p-4">
       <div className="flex items-center ">
@@ -11,29 +23,27 @@ const Post = () => {
           <p className="text-lg">Y</p>
         </div>
         <div className="flex flex-col">
-          <h1 className="font-semibold">Akosi Chihuahua Dogie</h1>
+          <div className="flex">
+            <h1 className="font-semibold ">
+              {`${user_first_name} ${user_last_name}`}
+            </h1>
+          </div>
+
           <p className="text-xs text-gray-400">
             Barangay 80, Bagumbayan, Tacloban City, Leyte
           </p>
         </div>
+        <div className="ml-auto rounded-full w-auto px-4 py-2 text-xs flex items-center justify-center font-medium bg-red-600 text-white">
+          {category}
+        </div>
       </div>
       <div className="mt-3">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, quam
-          nesciunt. Nobis a inventore earum cum deleniti! Similique iste cumque
-          optio necessitatibus molestiae reiciendis id aliquid non ut dolore
-          tempora facere, tempore quasi perspiciatis nulla aut pariatur
-          exercitationem! Quis nihil minima consequatur, explicabo vero qui
-          deserunt voluptate in obcaecati veniam?
-        </p>
+        <p>{post_description}</p>
       </div>
       <div className="mt-3 flex flex-row">
-        <Hashtag />
-        <Hashtag />
-        <Hashtag />
-        <Hashtag />
-        <Hashtag />
-        <Hashtag />
+        {tags.map((tag) => {
+          return <Hashtag key={`${user_id}${tag}`} name={tag} />;
+        })}
       </div>
       <div className="mt-3">
         <img
@@ -44,7 +54,7 @@ const Post = () => {
       </div>
       <div className="mt-3 flex  items-center">
         <MdThumbUp className="text-red-600 mr-2" size={20} />
-        <p className="text-gray-700">92</p>
+        <p className="text-gray-700">{upvotes}</p>
       </div>
     </div>
   );
