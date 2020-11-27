@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AuthService } from "../services/AuthService";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
-import Home from "./home/Home";
+import Main from "./home/Main";
 import Loading from "./loading/Loading";
 
 const Wrapper = () => {
@@ -10,11 +10,13 @@ const Wrapper = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showSignIn, setShowSignIn] = useState(true);
   const [isAuth, setIsAuth] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
   useEffect(() => {
     const _auth = new AuthService();
     const checkAuthenticated = async () => {
       const res = await _auth.checkAuthenticated();
       setIsAuth(res);
+      setCurrentUser(res);
       setCheckingUser(false);
     };
     if (checkingUser) {
@@ -26,7 +28,12 @@ const Wrapper = () => {
     return <Loading desc={"Loading"} />;
   } else {
     return isAuth ? (
-      <Home setCheckingUser={setCheckingUser} setIsAuth={setIsAuth} />
+      <Main
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        setCheckingUser={setCheckingUser}
+        setIsAuth={setIsAuth}
+      />
     ) : showSignIn ? (
       <Login
         setIsLoading={setIsLoading}

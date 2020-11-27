@@ -4,8 +4,12 @@ import { AuthService } from "../../services/AuthService";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import About from "./About";
 import Appbar from "../../components/Appbar";
+import HomeContainer from "../../containers/home/HomeContainer";
+import Sidebar from "../../components/home/Sidebar";
+import Body from "../../components/home/Body";
+import Extra from "../../components/home/Extra";
 
-const Home = ({ setIsAuth, setCheckingUser }) => {
+const Main = ({ setIsAuth, setCheckingUser, currentUser, setCurrentUser }) => {
   const _auth = new AuthService();
   const { addToast } = useToasts();
 
@@ -13,6 +17,7 @@ const Home = ({ setIsAuth, setCheckingUser }) => {
     _auth.signOut();
     setCheckingUser(true);
     setIsAuth(false);
+    setCurrentUser({});
     addToast("Logged Out Succesfully", {
       appearance: "success",
       autoDismiss: true,
@@ -22,10 +27,14 @@ const Home = ({ setIsAuth, setCheckingUser }) => {
   return (
     <Router>
       <div className="flex flex-col">
-        <Appbar onSignOut={onSignOut} />
+        <Appbar onSignOut={onSignOut} currentUser={currentUser} />
         <Switch>
           <Route exact path="/">
-            <div>Home</div>
+            <HomeContainer>
+              <Sidebar currentUser={currentUser} />
+              <Body currentUser={currentUser} />
+              <Extra currentUser={currentUser} />
+            </HomeContainer>
           </Route>
           <Route exact path="/about">
             <About />
@@ -39,4 +48,4 @@ const Home = ({ setIsAuth, setCheckingUser }) => {
   );
 };
 
-export default Home;
+export default Main;

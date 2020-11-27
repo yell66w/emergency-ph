@@ -33,7 +33,7 @@ export class AuthService {
       const res = await API.get("/users/current", {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });
-      return true;
+      return res.data;
     } catch (error) {
       console.error(error.message);
       return false;
