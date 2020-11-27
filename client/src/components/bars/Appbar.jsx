@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdNotifications, MdCreate } from "react-icons/md";
+import { NotificationService } from "../../services/NotificationService";
 const Appbar = ({ onSignOut, currentUser }) => {
   const [isAccountButtonOpen, setIsAccountButtonOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const _notifications = new NotificationService();
+  const [notifications, setNotifications] = useState([]);
 
+  useEffect(() => {
+    const getAllMyNotifications = async () => {
+      try {
+        const res = await _notifications.getAllMyNotifications();
+        console.log(res);
+        setNotifications(res);
+      } catch (error) {}
+    };
+    getAllMyNotifications();
+  }, []);
   const onNotifClick = () => {
     if (isAccountButtonOpen) {
       setIsAccountButtonOpen(false);
@@ -55,13 +68,25 @@ const Appbar = ({ onSignOut, currentUser }) => {
                   Notifications
                 </div>
 
-                <button
-                  type="submit"
-                  class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
-                  role="menuitem"
-                >
-                  Ryan wants to connect with you
-                </button>
+                {notifications.length > 0 ? (
+                  notifications.map((notification) => {
+                    return (
+                      <button
+                        key={notification.id}
+                        type="submit"
+                        class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
+                        role="menuitem"
+                      >
+                        <span className="font-medium">
+                          {notification.victim_name}
+                        </span>{" "}
+                        {notification.description}
+                      </button>
+                    );
+                  })
+                ) : (
+                  <p className="px-4 font-normal pb-2">No Notifications</p>
+                )}
               </div>
             </div>
           ) : null}
