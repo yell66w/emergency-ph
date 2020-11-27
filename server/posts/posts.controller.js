@@ -7,7 +7,7 @@ const postService = require('./post.service');
 
 router.get('/', getAllPost);
 router.get('/:id', getPostById);
-// router.get('/popular', getAllsortByPopular);
+router.get('/popular', getAllPostsByPopularity);
 // router.get('/lastest', getAllsortBydatecreated);
 // router.get('/completed', getAllByStatus);
 router.post('/create', createPost);
@@ -15,6 +15,13 @@ router.put('/:id', updatePost);
 router.delete('/:id', deletePost);
 
 module.exports = router;
+
+function getAllPostsByPopularity(req, res, next) {
+    postService.getAllPostsByPopularity()
+        .then(posts => res.json(posts))
+        .catch(err => next(err));
+}
+
 function getAllPost(req, res, next) {
     postService.getAllPost()
         .then(posts => res.json(posts))
