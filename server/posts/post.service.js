@@ -12,6 +12,7 @@ const Tag = db.Tag;
 module.exports = {
     getAllPost,
     getPostById,
+	getAllPostsByPopularity,
     createPost,
     updatePost,
     deletePost
@@ -23,6 +24,10 @@ async function getAllPost() {
 
 async function getPostById(id) {
     return await Post.findById(id);
+}
+
+async function getAllPostsByPopularity(upvotes){
+	return await Post.find({ upvotes : 0 });
 }
 
 async function createPost(userParam, userid) {
