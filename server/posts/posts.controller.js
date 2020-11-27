@@ -13,7 +13,7 @@ router.get('/:id', getPostById);
 router.post('/create', createPost);
 router.put('/:id', updatePost);
 router.delete('/:id', deletePost);
-console.log('hello')
+
 module.exports = router;
 function getAllPost(req, res, next) {
     postService.getAllPost()

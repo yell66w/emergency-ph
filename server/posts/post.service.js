@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('_helpers/db');
 const Post = db.Post;
+const Tag = db.Tag;
 
 module.exports = {
     getAllPost,
@@ -36,8 +37,27 @@ async function createPost(userParam, userid) {
         tags: userParam.tags,
         category: userParam.category
     });
+    const gettingTag = await Tag.findOne({tag: userParam.tags});
+    if (gettingTag) {
+        await Tag.updateOne( { _id:gettingTag } , {
+            tag: userParam.tags,
+            post_count: gettingTag.post_count + 1,
+            $push:{ posts:post }
+        });
+    } else {
+        const tags = new Tag({
+            tag: userParam.tags,
+            post_count:1,
+            posts:post
+        });
+         await tags.save();
+    }
+    
+   
+    
+
     // save user
-    await post.save();
+    //await post.save();
 }
 
 async function updatePost(id, userParam) {
