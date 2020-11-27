@@ -17,6 +17,9 @@ module.exports = {
   deletePost,
   getAllTyphoonPosts,
   deleteAllPosts,
+  getAllFirePosts,
+  getAllEarthquakePosts,
+  getAllCrimePosts,
 };
 
 async function getAllPost() {
@@ -24,6 +27,18 @@ async function getAllPost() {
 }
 async function getAllTyphoonPosts() {
   return await Post.find({ category: "TYPHOON" });
+  // return await { message: "working" };
+}
+async function getAllFirePosts() {
+  return await Post.find({ category: "FIRE" });
+  // return await { message: "working" };
+}
+async function getAllEarthquakePosts() {
+  return await Post.find({ category: "EARTHQUAKE" });
+  // return await { message: "working" };
+}
+async function getAllCrimePosts() {
+  return await Post.find({ category: "CRIME" });
   // return await { message: "working" };
 }
 

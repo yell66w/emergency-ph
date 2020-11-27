@@ -6,10 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { postSchema } from "../../models/PostSchema";
 import Spinner from "react-spinners/MoonLoader";
 import { PostService } from "../../services/PostService";
-import SortTab from "../../components/misc/SortTab";
 import CreatePost from "../../components/misc/CreatePost";
+import SortTab from "../../components/misc/SortTab";
 
-const CrimesBody = ({ currentUser }) => {
+const FireBody = ({ currentUser }) => {
   const _post = new PostService();
   const [posts, setPosts] = useState([]);
   const { register, handleSubmit, errors } = useForm({
@@ -36,7 +36,7 @@ const CrimesBody = ({ currentUser }) => {
   useEffect(() => {
     const getAllPosts = async () => {
       setIsLoading(true);
-      const posts = await _post.getAllCrimePosts();
+      const posts = await _post.getAllFirePosts();
       console.log(posts);
       setPosts(posts);
       setIsLoading(false);
@@ -52,7 +52,6 @@ const CrimesBody = ({ currentUser }) => {
       <div className="w-3/5  px-4 pt-2">
         <CreatePost currentUser={currentUser} setShowModal={setShowModal} />
         <SortTab />
-
         <div className="bg-transparent rounded-lg mt-4 flex flex-col">
           {isLoading ? (
             <div className="flex items-center justify-center h-full min-h-screen ">
@@ -127,4 +126,4 @@ const CrimesBody = ({ currentUser }) => {
   );
 };
 
-export default CrimesBody;
+export default FireBody;
