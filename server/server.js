@@ -17,6 +17,7 @@ app.use(jwt());
 app.use('/users', require('./users/users.controller'));
 app.use('/posts', require('./posts/posts.controller'));
 app.use('/tags', require('./tags/tags.controller'));
+app.use('/notifications', require('./notifications/notifications.controller'));
 
 // global error handler
 app.use(errorHandler);

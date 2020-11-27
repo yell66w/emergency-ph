@@ -7,5 +7,6 @@ mongoose.Promise = global.Promise;
 module.exports = {
     User: require('../users/user.model'),
     Post: require('../posts/post.model'),
-    Tag: require('../tags/tag.model')
+    Tag: require('../tags/tag.model'),
+    Notification: require('../Notifications/Notification.model')
 };
