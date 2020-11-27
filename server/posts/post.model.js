@@ -11,13 +11,13 @@ const schema = new Schema({
     user_name: { type: String, required: true },
     created_date: { type: Date, default: Date.now },
     updatedDate: { type: Date , default: Date.now},
-    upvotes: Number,
+    upvotes: {type: Number},
     status: { type: String, enum : ['PENDING','RESCUED'],  default: 'PENDING'},
     post_title:{ type: String, required: true },
 	post_description:{ type: String, required: true },
-	photos:Array,
-	tags:Array,
-	category: { type: String, enum : [] },
+	photos:{type:Array},
+	tags:{type:Array},
+	category: { type: String, enum : ['TYPHOON','FIRE','EARTHQUAKE','CRIME'] },
 });
 
 schema.set('toJSON', {

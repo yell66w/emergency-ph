@@ -5,6 +5,7 @@ const config = require('config.json');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('_helpers/db');
+const User = db.User;
 const Post = db.Post;
 const Tag = db.Tag;
 
@@ -25,11 +26,12 @@ async function getPostById(id) {
 }
 
 async function createPost(userParam, userid) {
-    // validate
+    const userData = await User.findById(userid);
+    console.log(userData)
     const post = new Post({
-        user_id: userid,
-        user_name: userParam.username,
-        upvotes: userParam.upvotes,
+        user_id: userData._id,
+        user_name: userData.username,
+        upvotes: 0,
         status: userParam.status,
         post_title: userParam.title,
         post_description: userParam.description,
@@ -52,12 +54,9 @@ async function createPost(userParam, userid) {
         });
          await tags.save();
     }
-    
-   
-    
 
     // save user
-    //await post.save();
+    await post.save();
 }
 
 async function updatePost(id, userParam) {
