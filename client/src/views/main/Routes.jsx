@@ -13,6 +13,7 @@ import CrimesBody from "./CrimesBody";
 import Error404 from "./Error404";
 import FireBody from "./FireBody";
 import QuakeBody from "./QuakeBody";
+import TagsBody from "./TagsBody";
 
 const Main = ({ setIsAuth, setCheckingUser, currentUser, setCurrentUser }) => {
   const _auth = new AuthService();
@@ -50,6 +51,9 @@ const Main = ({ setIsAuth, setCheckingUser, currentUser, setCurrentUser }) => {
             </Route>
             <Route exact path="/crimes">
               <CrimesBody currentUser={currentUser} />
+            </Route>
+            <Route exact path="/t/:tag">
+              <TagsBody currentUser={currentUser} />
             </Route>
             <Route path="/*">
               <Error404 currentUser={currentUser} />
