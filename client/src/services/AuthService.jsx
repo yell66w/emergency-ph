@@ -14,13 +14,24 @@ export class AuthService {
       };
     }
   }
-  async signUp(firstName, lastName, username, password) {
+  async signUp(
+    firstName,
+    lastName,
+    username,
+    password,
+    role,
+    cellphone_number,
+    address
+  ) {
     try {
       const res = await API.post("/users/register", {
         firstName,
         lastName,
         username,
         password,
+        role,
+        cellphone_number,
+        address,
       });
     } catch (error) {
       throw {
