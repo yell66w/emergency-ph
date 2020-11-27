@@ -1,4 +1,4 @@
-﻿//DITO NIYO ILALAGAY YUNG MGA ROUTES TAPOS YUNG MGA FUNCTION NA GAGAMITIN NYA SA SERVICE
+//DITO NIYO ILALAGAY YUNG MGA ROUTES TAPOS YUNG MGA FUNCTION NA GAGAMITIN NYA SA SERVICE
 const express = require("express");
 const router = express.Router();
 const postService = require("./post.service");
@@ -10,13 +10,14 @@ router.get("/typhoon", getAllTyphoonPosts);
 router.get("/fire", getAllFirePosts);
 router.get("/earthquake", getAllEarthquakePosts);
 router.get("/crimes", getAllCrimePosts);
+router.get("/popular", getAllPostsByPopularity);
+
+// router.get("/latest", getAllsortBydatecreated);
+// router.get("/completed", getAllByStatus);
 
 //ilagay mo sa taas ng /:id yung mga endpoints mo kasi yun yung rule
 
 router.get("/:id", getPostById);
-router.get("/popular", getAllPostsByPopularity);
-// router.get('/lastest', getAllsortBydatecreated);
-// router.get('/completed', getAllByStatus);
 router.post("/create", createPost);
 router.put("/:id", updatePost);
 router.delete("/:id", deletePost);
