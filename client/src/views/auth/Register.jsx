@@ -17,8 +17,24 @@ const Register = ({ setShowSignIn }) => {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
-      const { username, password, firstName, lastName } = data;
-      await _auth.signUp(firstName, lastName, username, password);
+      const {
+        username,
+        password,
+        firstName,
+        lastName,
+        role,
+        cellphone_number,
+        address,
+      } = data;
+      await _auth.signUp(
+        firstName,
+        lastName,
+        username,
+        password,
+        role,
+        cellphone_number,
+        address
+      );
       addToast("Registered Successfully", {
         appearance: "success",
         autoDismiss: true,
@@ -41,7 +57,7 @@ const Register = ({ setShowSignIn }) => {
           initial={{ x: -1000 }}
           animate={{ x: 0 }}
           transition={{ ease: "easeOut", duration: 0.5 }}
-          className="flex flex-col justify-center items-center h-full"
+          className="flex flex-col justify-center items-center h-full py-4"
           onSubmit={handleSubmit(onSubmit)}
         >
           <h1 className="text-4xl font-bold  text-red-500 ">Create Account</h1>
@@ -77,6 +93,37 @@ const Register = ({ setShowSignIn }) => {
               {errors.lastName?.message}
             </small>
           ) : null}
+
+          <input
+            className={`
+            ${errors.cellphone_number ? "border border-red-600" : null} 
+            focus:outline-none focus:bg-gray-200 font-medium bg-gray-100 w-2/5 h-14 px-6 py-4 text-sm mt-3`}
+            type="text"
+            name="cellphone_number"
+            placeholder="Phone number (09*********)"
+            ref={register}
+          />
+          {errors.cellphone_number ? (
+            <small className="text-xs w-2/5 text-red-600 font-medium my-1">
+              {errors.cellphone_number?.message}
+            </small>
+          ) : null}
+
+          <input
+            className={`
+            ${errors.address ? "border border-red-600" : null} 
+            focus:outline-none focus:bg-gray-200 font-medium bg-gray-100 w-2/5 h-14 px-6 py-4 text-sm mt-3`}
+            type="text"
+            name="address"
+            placeholder="Address / Location"
+            ref={register}
+          />
+          {errors.address ? (
+            <small className="text-xs w-2/5 text-red-600 font-medium my-1">
+              {errors.address?.message}
+            </small>
+          ) : null}
+
           <input
             className={`
             ${errors.username ? "border border-red-600" : null} 
@@ -120,6 +167,22 @@ const Register = ({ setShowSignIn }) => {
               {errors.confirmPassword?.message}
             </small>
           ) : null}
+          <select
+            className={`
+            ${errors.role ? "border border-red-600" : null} 
+            focus:outline-none focus:bg-gray-200 font-medium bg-gray-100 w-2/5 h-14 px-6 py-4 text-sm mt-3`}
+            name="role"
+            placeholder="Role"
+            ref={register}
+          >
+            <option value="NORMAL">Member</option>
+            <option value="VOLUNTEER">Volunteer</option>
+          </select>
+          {errors.role ? (
+            <small className="text-xs w-2/5 text-red-600 font-medium my-1">
+              {errors.role?.message}
+            </small>
+          ) : null}
 
           <button
             className="transition duration-500 w-48 flex justify-center ease-in-out focus:bg-red-600 bg-red-500 focus:outline-none hover:bg-red-600 mt-9 cursor-pointer text-white font-semibold tracking-widest px-16 py-3 rounded-full text-sm"
@@ -138,7 +201,7 @@ const Register = ({ setShowSignIn }) => {
         initial={{ x: 1000 }}
         animate={{ x: 0 }}
         transition={{ ease: "easeOut", duration: 0.5 }}
-        className="flex order-1 w-1/3 flex-col bg-gradient-to-bl from-red-500 to-red-600 min-h-screen h-full text-white justify-center items-center"
+        className="flex order-1 w-1/3 flex-col bg-gradient-to-bl from-red-500 to-red-600 min-h-screen h-auto text-white justify-center items-center"
       >
         <h1 className="text-4xl font-bold">Hello, Friend!</h1>
 
