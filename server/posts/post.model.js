@@ -7,6 +7,8 @@ const Schema = mongoose.Schema;
 const schema = new Schema({
   user_id: { type: String, required: true },
   user_name: { type: String, required: true },
+  user_first_name: { type: String, required: true },
+  user_last_name: { type: String, required: true },
   created_date: { type: Date, default: Date.now },
   updatedDate: { type: Date, default: Date.now },
   upvotes: { type: Number },
