@@ -39,7 +39,7 @@ export class AuthService {
       });
     } catch (error) {
       throw {
-        message: "Sorry, Please try again!",
+        message: "Username is already taken!",
       };
     }
   }

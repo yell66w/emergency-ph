@@ -5,7 +5,7 @@ const CreatePost = ({ currentUser, setShowModal }) => {
     <div className="flex flex-row bg-white shadow px-4 py-4 rounded-lg">
       <div className="flex mr-2">
         <div className="flex justify-center items-center text-white cursor-pointer focus:outline-none w-12 h-12 bg-red-600 bg-transparent rounded-full">
-          <p className="text-lg">{currentUser.firstName[0]}</p>
+          <p className="text-lg">{currentUser.firstName[0].toUpperCase()}</p>
         </div>
         {/* <img className="w-10 h-10 rounded-full" src="" alt="" /> */}
       </div>

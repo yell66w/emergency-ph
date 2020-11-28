@@ -45,6 +45,7 @@ export class PostService {
       const res = await API.get("/posts/popular", {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });
+      // console.log("pop", res);
       return res.data;
     } catch (error) {}
   }

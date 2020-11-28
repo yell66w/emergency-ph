@@ -82,13 +82,6 @@ const Login = ({ setShowSignIn, setIsAuth, setCheckingUser }) => {
             </small>
           ) : null}
 
-          <a
-            className="border-b font-semibold tracking-wide  border-gray-700 mt-5"
-            href="/"
-          >
-            Forgot your password?
-          </a>
-
           <button
             className="transition duration-500 w-48 flex justify-center ease-in-out focus:bg-red-600 bg-red-500 focus:outline-none hover:bg-red-600 mt-9 cursor-pointer text-white font-semibold tracking-widest px-16 py-3 rounded-full text-sm"
             type="submit"

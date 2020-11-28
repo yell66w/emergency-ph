@@ -15,42 +15,42 @@ const Sidebar = () => {
       <ul className=" pl-10 py-4 text-lg flex flex-col">
         <Link
           to="/"
-          className="font-bold  focus:bg-gray-200 mb-1 flex items-center py-4 px-4 rounded-lg hover:bg-gray-200"
+          className="font-bold  mb-1 flex items-center py-4 px-4 rounded-lg hover:bg-gray-200"
         >
           <RiHome3Fill size={30} className="mr-3" />
           Home
         </Link>
         <Link
           to="/typhoon"
-          className="font-bold  focus:bg-gray-200 mb-1 flex items-center  py-4 px-4 rounded-lg hover:bg-gray-200"
+          className="font-bold  mb-1 flex items-center  py-4 px-4 rounded-lg hover:bg-gray-200"
         >
           <RiThunderstormsFill size={30} className="mr-3" />
           Typhoon
         </Link>
         <Link
           to="/fire"
-          className="font-bold  focus:bg-gray-200 mb-1 flex items-center py-4 px-4 rounded-lg hover:bg-gray-200"
+          className="font-bold  mb-1 flex items-center py-4 px-4 rounded-lg hover:bg-gray-200"
         >
           <AiFillFire size={30} className="mr-3" />
           Fire
         </Link>
         <Link
           to="/earthquake"
-          className="font-bold  focus:bg-gray-200 mb-1 flex items-center py-4 px-4 rounded-lg hover:bg-gray-200"
+          className="font-bold  mb-1 flex items-center py-4 px-4 rounded-lg hover:bg-gray-200"
         >
           <RiEarthquakeFill size={30} className="mr-3" />
           Earthquake
         </Link>
         <Link
           to="/crimes"
-          className="font-bold  focus:bg-gray-200 mb-1 flex items-center py-4 px-4 rounded-lg hover:bg-gray-200"
+          className="font-bold  mb-1 flex items-center py-4 px-4 rounded-lg hover:bg-gray-200"
         >
           <RiPoliceCarFill size={30} className="mr-3" />
           Crimes
         </Link>
         {/* <Link
           to="/volunteer"
-          className="font-bold  focus:bg-gray-200 mb-1 flex items-center py-4 px-4 rounded-lg hover:bg-gray-200"
+          className="font-bold  mb-1 flex items-center py-4 px-4 rounded-lg hover:bg-gray-200"
         >
           <BsPeopleFill size={30} className="mr-3" />
           Volunteers

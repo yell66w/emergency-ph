@@ -111,7 +111,7 @@ const Appbar = ({ onSignOut, currentUser }) => {
             onClick={onAccountClick}
             className="flex justify-center items-center text-red-600 cursor-pointer focus:outline-none w-10 h-10 border border-red-600 bg-transparent rounded-full"
           >
-            <p className="text-lg">{currentUser.firstName[0]}</p>
+            <p className="text-lg">{currentUser.firstName[0].toUpperCase()}</p>
           </button>
           {isAccountButtonOpen ? (
             <div class="origin-top-right absolute right-10 top-12 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
