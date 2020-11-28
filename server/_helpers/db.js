@@ -8,5 +8,6 @@ module.exports = {
     User: require('../users/user.model'),
     Post: require('../posts/post.model'),
     Tag: require('../tags/tag.model'),
-    Notification: require('../Notifications/Notification.model')
+    Notification: require('../Notifications/Notification.model'),
+    Upvote: require('../Upvotes/Upvote.model')
 };

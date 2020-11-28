@@ -14,6 +14,8 @@ const schema = new Schema({
   volunteer_cellphone_number: { type: String, required: false },
   createdDate: { type: Date, default: Date.now },
   address: { type: String, required: true },
+  lng: { type: Number, required: true },
+  lat: { type: Number, required: true },
 });
 
 schema.set("toJSON", {

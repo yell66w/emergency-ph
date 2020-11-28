@@ -78,9 +78,9 @@ const Extra = ({ currentUser }) => {
     getVolunteers();
   }, []);
   return (
-    <div className="w-1/5 bg-brown-500 border shadow-sm  ">
+    <div className="w-1/5 bg-brown-500 ">
       <div className=" px-4 py-4 ">
-        <div className="text-sm ">
+        <div className="text-sm rounded-lg shadow p-6">
           <h1 className="text-xl font-bold border-b mb-4">TRENDING</h1>
           <div className="flex flex-row flex-wrap">
             {isLoadingTags ? (
@@ -94,7 +94,7 @@ const Extra = ({ currentUser }) => {
             )}
           </div>
         </div>
-        <div className="text-sm mt-4">
+        <div className="text-sm mt-4 shadow p-6 rounded-lg">
           <h1 className="text-xl font-bold border-b mb-4">HOTLINES</h1>
           {hotlines.map((hotline, idx) => {
             return (
@@ -105,7 +105,7 @@ const Extra = ({ currentUser }) => {
             );
           })}
         </div>
-        <div className="text-sm mt-4">
+        <div className="text-sm mt-4 shadow rounded-lg p-6">
           <h1 className="text-xl font-bold border-b mb-4">VOLUNTEERS</h1>
           {isLoadingVolunteers ? (
             <div className="flex items-center justify-center  w-full">
@@ -115,7 +115,11 @@ const Extra = ({ currentUser }) => {
             volunteers.map((volunteer) => {
               if (currentUser.id !== volunteer.id) {
                 return (
-                  <VolunteerExtra key={volunteer.id} volunteer={volunteer} />
+                  <VolunteerExtra
+                    currentUser={currentUser}
+                    key={volunteer.id}
+                    volunteer={volunteer}
+                  />
                 );
               }
             })

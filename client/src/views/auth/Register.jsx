@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AuthService } from "../../services/AuthService";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,16 +6,25 @@ import { registerSchema } from "../../models/AuthSchema";
 import { useToasts } from "react-toast-notifications";
 import { motion } from "framer-motion";
 import Spinner from "react-spinners/MoonLoader";
+import { myLocation } from "../../services/Haversine";
 const Register = ({ setShowSignIn }) => {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(registerSchema),
   });
   const { addToast } = useToasts();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const [coords, setCoords] = useState({});
   const _auth = new AuthService();
+  useEffect(() => {
+    window.navigator.geolocation.getCurrentPosition(function (pos) {
+      setCoords(pos.coords);
+    });
+  }, []);
   const onSubmit = async (data) => {
     setIsSubmitting(true);
+
+    console.log(coords);
+
     try {
       const {
         username,
@@ -33,7 +42,9 @@ const Register = ({ setShowSignIn }) => {
         password,
         role,
         cellphone_number,
-        address
+        address,
+        coords.latitude,
+        coords.longitude
       );
       addToast("Registered Successfully", {
         appearance: "success",

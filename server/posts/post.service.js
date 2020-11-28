@@ -1,4 +1,4 @@
-//ITO NIYO ILALAGAY YUNG PINAKA LOGIC TALAGA WALANG ROUTING MGA FUNCTION LANG
+﻿//TO NIYO ILALAGAY YUNG PINAKA LOGIC TALAGA WALANG ROUTING MGA FUNCTION LANG
 
 const config = require("config.json");
 const jwt = require("jsonwebtoken");
@@ -7,6 +7,7 @@ const db = require("_helpers/db");
 const User = db.User;
 const Post = db.Post;
 const Tag = db.Tag;
+const Upvote = db.Upvote;
 
 module.exports = {
   getAllPost,
@@ -90,6 +91,7 @@ async function createPost(userParam, userid, req) {
     user_name: userData.username,
     user_first_name: userData.firstName,
     user_last_name: userData.lastName,
+    user_address: userData.address,
     upvotes: 0,
     status: userParam.status,
     post_title: userParam.title,
@@ -124,28 +126,64 @@ async function createPost(userParam, userid, req) {
   await post.save();
 }
 
-async function addupvote(id) {
-  const post = await Post.findById(id);
-  // validate
-  if (!post) throw "Post not found";
-  const obj = {
-    upvotes: post.upvotes + 1,
-  };
-  Object.assign(post, obj);
+async function addupvote(postid, userid) {
+  const oldupvote = await Upvote.findOne({ post_id: postid, user_id: userid });
+  if (oldupvote == null) {
+    //adding up new vote
+    const upvote = new Upvote({
+      post_id: postid,
+      user_id: userid,
+    });
+    await upvote.save();
 
-  await post.save();
+    const post = await Post.findById(postid);
+    // validate
+    if (!post) throw "Post not found";
+    const obj = {
+      upvotes: post.upvotes + 1,
+    };
+    Object.assign(post, obj);
+    await post.save();
+  } else {
+    if (oldupvote.liked == false) {
+      //changing old vote
+      const upvote = { liked: true };
+      // copy upvote properties to oldupvote
+      Object.assign(oldupvote, upvote);
+      await oldupvote.save();
+
+      const post = await Post.findById(postid);
+      // validate
+      if (!post) throw "Post not found";
+      const obj = {
+        upvotes: post.upvotes + 1,
+      };
+      Object.assign(post, obj);
+      await post.save();
+    } else {
+      //nothing
+    }
+  }
 }
-async function minusupvote(id) {
-  const post = await Post.findById(id);
-  // validate
-  if (!post) throw "Post not found";
-  const obj = {
-    upvotes: post.upvotes - 1,
-  };
+async function minusupvote(postid, userid) {
+  const oldupvote = await Upvote.findOne({ post_id: postid, user_id: userid });
+  if (oldupvote.liked == true) {
+    const upvote = { liked: false };
+    // copy upvote properties to oldupvote
+    Object.assign(oldupvote, upvote);
+    await oldupvote.save();
 
-  Object.assign(post, obj);
-
-  await post.save();
+    const post = await Post.findById(postid);
+    // validate
+    if (!post) throw "Post not found";
+    const obj = {
+      upvotes: post.upvotes - 1,
+    };
+    Object.assign(post, obj);
+    await post.save();
+  } else {
+    //nothing
+  }
 }
 
 async function updatePost(id, userParam) {

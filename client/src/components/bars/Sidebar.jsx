@@ -11,7 +11,7 @@ import { BsPeopleFill } from "react-icons/bs";
 
 const Sidebar = () => {
   return (
-    <div className="w-1/5  border shadow-sm  text-gray-800">
+    <div className="w-1/5    text-gray-800">
       <ul className=" px-4 py-4">
         <Link
           to="/"
