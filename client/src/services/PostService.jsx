@@ -2,18 +2,26 @@ import { API } from "../utils/API";
 export class PostService {
   async createPost(data) {
     try {
+      const formData = new FormData();
+
       let hashtagRegex = data.description.match(/\#[^\s]+/g);
       let tags = hashtagRegex != null ? hashtagRegex : [];
+      const photo = data.photo[0];
+      formData.append("file", photo);
 
       data = {
         ...data,
         upvotes: 0,
         status: "PENDING",
         title: "Untitled",
-        photos: ["image.jpg", "image2.jpeg"],
+        photos: [photo.name],
         tags,
       };
+
       const res = await API.post("/posts/create", data, {
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+      });
+      await API.post("posts/file", formData, {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });
       return true;

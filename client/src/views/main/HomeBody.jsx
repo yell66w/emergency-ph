@@ -8,6 +8,7 @@ import Spinner from "react-spinners/MoonLoader";
 import { PostService } from "../../services/PostService";
 import CreatePost from "../../components/misc/CreatePost";
 import SortTab from "../../components/misc/SortTab";
+import { RiImageAddFill } from "react-icons/ri";
 
 const Body = ({ currentUser }) => {
   const _post = new PostService();
@@ -20,6 +21,7 @@ const Body = ({ currentUser }) => {
   const [showModal, setShowModal] = useState(false);
   const [postUpdated, setPostUpdated] = useState(true);
   const [sortedBy, setSortedBy] = useState("LATEST");
+  const [fileURL, setFileURL] = useState();
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
@@ -40,6 +42,7 @@ const Body = ({ currentUser }) => {
       if (sortedBy === "POPULAR") posts = await _post.getAllPopularPosts();
       else posts = await _post.getAllPosts();
       setPosts(posts);
+      console.log(posts);
       setIsLoading(false);
       setPostUpdated(false);
     };
@@ -110,6 +113,39 @@ const Body = ({ currentUser }) => {
                 {errors.category?.message}
               </small>
             ) : null}
+            <div className="w-full flex  items-center justify-center">
+              <label className="w-full bg-gray-100 mt-4 flex flex-col items-center justify-center px-4 py-6  text-blue rounded-lg tracking-wide uppercase  cursor-pointer hover:bg-gray-200 hover:text-white">
+                {fileURL ? (
+                  <img
+                    className="w-64 h-36 object-cover rounded-lg"
+                    src={fileURL}
+                  />
+                ) : (
+                  <>
+                    <RiImageAddFill size={30} />
+                    <span className="mt-2 text-base leading-normal">
+                      Add a photo
+                    </span>
+                  </>
+                )}
+
+                <input
+                  ref={register}
+                  type="file"
+                  class="hidden"
+                  name="photo"
+                  onChange={(e) =>
+                    setFileURL(URL.createObjectURL(e.target.files[0]))
+                  }
+                />
+              </label>
+            </div>
+
+            {/* {errors.description ? (
+              <small className="text-xs w-2/5 text-red-600 font-medium my-1">
+                {errors.description?.message}
+              </small>
+            ) : null} */}
 
             <button
               className="transition duration-500 w-full flex justify-center ease-in-out focus:bg-red-600 bg-red-500 focus:outline-none hover:bg-red-600 mt-9 cursor-pointer text-white font-semibold tracking-widest px-16 py-3 rounded-lg text-sm"
