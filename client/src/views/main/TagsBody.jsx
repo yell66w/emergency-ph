@@ -55,7 +55,7 @@ const TagsBody = ({ currentUser }) => {
     <>
       <div className="w-3/5  px-4 pt-2">
         <CreatePost currentUser={currentUser} setShowModal={setShowModal} />
-        <SortTab />
+        {/* <SortTab /> */}
 
         <div className="bg-transparent rounded-lg mt-4 flex flex-col">
           {isLoading ? (

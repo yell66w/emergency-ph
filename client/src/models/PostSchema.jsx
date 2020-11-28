@@ -8,3 +8,5 @@ export const postSchema = yup.object().shape({
   tags: yup.array().of(yup.string()),
   category: yup.string().required("Category is required"),
 });
+
+export const photoSchema = yup.object().shape({});

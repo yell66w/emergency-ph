@@ -78,7 +78,7 @@ const Extra = ({ currentUser }) => {
     getVolunteers();
   }, []);
   return (
-    <div className="w-1/5 bg-brown-500 shadow ">
+    <div className="w-1/5 bg-brown-500 border shadow-sm  ">
       <div className=" px-4 py-4 ">
         <div className="text-sm ">
           <h1 className="text-xl font-bold border-b mb-4">TRENDING</h1>
@@ -96,9 +96,9 @@ const Extra = ({ currentUser }) => {
         </div>
         <div className="text-sm mt-4">
           <h1 className="text-xl font-bold border-b mb-4">HOTLINES</h1>
-          {hotlines.map((hotline) => {
+          {hotlines.map((hotline, idx) => {
             return (
-              <p className="mb-2">
+              <p key={idx} className="mb-2">
                 <span className="font-bold">{hotline.name}</span> -{" "}
                 {hotline.phone}
               </p>

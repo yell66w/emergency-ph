@@ -7,17 +7,29 @@ const postService = require("./post.service");
 
 router.get("/", getAllPost);
 router.get("/typhoon", getAllTyphoonPosts);
+router.get("/typhoon/popular", getAllTyphoonByPopularity);
+// router.get("/typhoon/completed", getAllTyphoonPostsByCompleted);
 router.get("/fire", getAllFirePosts);
+router.get("/fire/popular", getAllFirePostsByPopularity);
+// router.get("/fire/completed", getAllFirePostsByCompleted);
 router.get("/earthquake", getAllEarthquakePosts);
+router.get("/earthquake/popular", getAllEarthquakePostsByPopularity);
+// router.get("/earthquake/completed", getAllEarthquakePostsByCompleted);
 router.get("/crimes", getAllCrimePosts);
-router.get("/popular", getAllPostsByPopularity);
-
+router.get("/crimes/popular", getAllCrimePostsByPopularity);
+// router.get("/crimes/completed", getAllCrimePostsByCompleted);
+router.post("/file", savefile);
 router.get("/latest", getAllsortBydatecreated);
 router.get("/completed", getAllByStatus);
-
 //ilagay mo sa taas ng /:id yung mga endpoints mo kasi yun yung rule
 
+router.get("/popular", getAllPostsByPopularity);
+router.put("/popular/upvote/add", addupvote);
+router.put("/popular/upvote/minus", minusupvote);
+// router.get('/lastest', getAllsortBydatecreated);
+// router.get('/completed', getAllByStatus);
 router.get("/:id", getPostById);
+
 router.post("/create", createPost);
 router.put("/:id", updatePost);
 router.delete("/:id", deletePost);
@@ -32,6 +44,20 @@ function getAllPostsByPopularity(req, res, next) {
     .catch((err) => next(err));
 }
 
+function addupvote(req, res, next) {
+  postService
+    .addupvote(req.body.id)
+    .then(() => res.json({}))
+    .catch((err) => next(err));
+}
+
+function minusupvote(req, res, next) {
+  postService
+    .minusupvote(req.body.id)
+    .then(() => res.json({}))
+    .catch((err) => next(err));
+}
+
 function getAllsortBydatecreated(req, res, next) {
   postService
     .getAllsortBydatecreated()
@@ -39,11 +65,11 @@ function getAllsortBydatecreated(req, res, next) {
     .catch((err) => next(err));
 }
 
-function getAllByStatus(req, res, next){
-	postService
-	.getAllByStatus()
-	.then(posts => res.json(posts))
-	.catch(err => next(err));
+function getAllByStatus(req, res, next) {
+  postService
+    .getAllByStatus()
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
 }
 
 function getAllPost(req, res, next) {
@@ -58,6 +84,21 @@ function getAllTyphoonPosts(req, res, next) {
     .then((posts) => res.json(posts))
     .catch((err) => next(err));
 }
+
+function getAllTyphoonByPopularity(req, res, next) {
+  postService
+    .getAllTyphoonByPopularity()
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
+}
+
+function getAllFirePostsByPopularity(req, res, next) {
+  postService
+    .getAllFirePostsByPopularity()
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
+}
+
 function getAllFirePosts(req, res, next) {
   postService
     .getAllFirePosts()
@@ -70,15 +111,29 @@ function getAllEarthquakePosts(req, res, next) {
     .then((posts) => res.json(posts))
     .catch((err) => next(err));
 }
+
+function getAllEarthquakePostsByPopularity(req, res, next) {
+  postService
+    .getAllEarthquakePostsByPopularity()
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
+}
 function getAllCrimePosts(req, res, next) {
   postService
     .getAllCrimePosts()
     .then((posts) => res.json(posts))
     .catch((err) => next(err));
 }
+
+function getAllCrimePostsByPopularity(req, res, next) {
+  postService
+    .getAllCrimePostsByPopularity()
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
+}
 function createPost(req, res, next) {
   postService
-    .createPost(req.body, req.user.sub)
+    .createPost(req.body, req.user.sub, req)
     .then(() =>
       res.json({
         created: "true",
@@ -111,5 +166,12 @@ function deleteAllPosts(req, res, next) {
   postService
     .deleteAllPosts()
     .then(() => res.json({}))
+    .catch((err) => next(err));
+}
+
+function savefile(req, res, next) {
+  postService
+    .savefile(req)
+    .then((data) => res.json(data))
     .catch((err) => next(err));
 }

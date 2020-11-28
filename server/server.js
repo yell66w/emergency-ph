@@ -5,10 +5,12 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('_helpers/jwt');
 const errorHandler = require('_helpers/error-handler');
+const fileUpload = require('express-fileupload');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(fileUpload());
 
 // use JWT auth to secure the api
 app.use(jwt());
