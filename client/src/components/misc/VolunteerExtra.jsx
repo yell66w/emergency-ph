@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdCall } from "react-icons/md";
 import Modal from "../../components/misc/Modal";
 import { useForm } from "react-hook-form";
@@ -6,15 +6,33 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Spinner from "react-spinners/MoonLoader";
 import { NotificationService } from "../../services/NotificationService";
 import { notificationSchema } from "../../models/NotificationSchema";
+import { calculateDistance } from "../../services/Haversine";
 
-const VolunteerExtra = ({ volunteer }) => {
-  const { firstName, cellphone_number, lastName, role, address } = volunteer;
+const VolunteerExtra = ({ volunteer, currentUser }) => {
+  const {
+    firstName,
+    cellphone_number,
+    lastName,
+    role,
+    address,
+    lat,
+    lng,
+  } = volunteer;
   const [showModal, setShowModal] = useState(false);
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(notificationSchema),
   });
+  const [distance, setDistance] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const _notification = new NotificationService();
+
+  useEffect(() => {
+    window.navigator.geolocation.getCurrentPosition(function (pos) {
+      setDistance(
+        calculateDistance(pos.coords.longitude, pos.coords.latitude, lng, lat)
+      );
+    });
+  }, []);
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
@@ -36,7 +54,8 @@ const VolunteerExtra = ({ volunteer }) => {
         <div className="flex flex-col justify-center">
           <h1 className="font-medium cursor-default">{`${firstName} ${lastName}`}</h1>
           <p className="text-xs text-gray-300 cursor-default">
-            {address.length > 25 ? address.substring(0, 25) + "..." : address}
+            {distance.toFixed(2)} km away
+            {/* {address.length > 25 ? address.substring(0, 25) + "..." : address} */}
           </p>
         </div>
         <div className="ml-auto flex items-center ">

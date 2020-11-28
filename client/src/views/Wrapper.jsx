@@ -4,6 +4,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Routes from "./main/Routes";
 import Loading from "./loading/Loading";
+import { calculateDistance, myLocation } from "../services/Haversine";
 
 const Wrapper = () => {
   const [checkingUser, setCheckingUser] = useState(true);
@@ -23,6 +24,7 @@ const Wrapper = () => {
       checkAuthenticated();
     }
   }, [checkingUser]);
+  useEffect(() => {}, []);
 
   if (checkingUser || isLoading) {
     return <Loading desc={"Loading"} />;

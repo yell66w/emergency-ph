@@ -91,6 +91,7 @@ async function createPost(userParam, userid, req) {
     user_name: userData.username,
     user_first_name: userData.firstName,
     user_last_name: userData.lastName,
+    user_address: userData.address,
     upvotes: 0,
     status: userParam.status,
     post_title: userParam.title,
@@ -126,13 +127,13 @@ async function createPost(userParam, userid, req) {
 }
 
 async function addupvote(postid, userid) {
-  const oldupvote = await Upvote.findOne({ post_id: postid , user_id : userid});
-  if (oldupvote == null){
+  const oldupvote = await Upvote.findOne({ post_id: postid, user_id: userid });
+  if (oldupvote == null) {
     //adding up new vote
     const upvote = new Upvote({
-      post_id:postid,
-      user_id:userid
-    })
+      post_id: postid,
+      user_id: userid,
+    });
     await upvote.save();
 
     const post = await Post.findById(postid);
@@ -143,11 +144,10 @@ async function addupvote(postid, userid) {
     };
     Object.assign(post, obj);
     await post.save();
-
-  }else{
+  } else {
     if (oldupvote.liked == false) {
       //changing old vote
-      const upvote = { liked:true } 
+      const upvote = { liked: true };
       // copy upvote properties to oldupvote
       Object.assign(oldupvote, upvote);
       await oldupvote.save();
@@ -160,15 +160,15 @@ async function addupvote(postid, userid) {
       };
       Object.assign(post, obj);
       await post.save();
-    }else{
+    } else {
       //nothing
     }
   }
 }
 async function minusupvote(postid, userid) {
-  const oldupvote = await Upvote.findOne({ post_id: postid , user_id : userid});
-  if(oldupvote.liked == true){
-    const upvote = { liked:false } 
+  const oldupvote = await Upvote.findOne({ post_id: postid, user_id: userid });
+  if (oldupvote.liked == true) {
+    const upvote = { liked: false };
     // copy upvote properties to oldupvote
     Object.assign(oldupvote, upvote);
     await oldupvote.save();
@@ -181,10 +181,9 @@ async function minusupvote(postid, userid) {
     };
     Object.assign(post, obj);
     await post.save();
-  }else{
+  } else {
     //nothing
   }
-
 }
 
 async function updatePost(id, userParam) {
