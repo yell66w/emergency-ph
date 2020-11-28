@@ -28,8 +28,8 @@ const Post = ({ post }) => {
     } catch (error) {}
   };
   return (
-    <div className="bg-white shadow rounded-lg flex flex-col mb-2 p-4">
-      <div className="flex items-center ">
+    <div className="bg-white shadow rounded-lg flex flex-col mb-2 py-4">
+      <div className="flex items-center px-4">
         <div className="mr-2 flex justify-center items-center text-white cursor-pointer focus:outline-none w-12 h-12 bg-red-600 bg-transparent rounded-full">
           <p className="text-lg">Y</p>
         </div>
@@ -48,22 +48,22 @@ const Post = ({ post }) => {
           {category}
         </div>
       </div>
-      <div className="mt-3">
+      <div className="mt-3 px-4">
         <p>{post_description}</p>
       </div>
-      <div className="mt-3 flex flex-row">
+      <div className="mt-3 flex flex-row px-4">
         {tags.map((tag) => {
           return <Hashtag key={`${user_id}${tag}`} name={tag} />;
         })}
       </div>
       <div className="mt-3">
         <img
-          src={bagyo}
-          className="object-cover h-1/2 w-full rounded-lg"
+          src={process.env.PUBLIC_URL + `/uploads/${photos[0]}`}
+          className="object-cover h-96 w-full "
           alt=""
         />
       </div>
-      <div className="mt-3 flex  items-center">
+      <div className="mt-3 flex  items-center px-4">
         <AiFillNotification
           onClick={onUpvote}
           className="text-gray-400 cursor-pointer transition duration-300 hover:text-red-600 mr-2"

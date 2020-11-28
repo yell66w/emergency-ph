@@ -78,7 +78,7 @@ const Extra = ({ currentUser }) => {
     getVolunteers();
   }, []);
   return (
-    <div className="w-1/5 bg-brown-500 shadow ">
+    <div className="w-1/5 bg-brown-500 border shadow-sm  ">
       <div className=" px-4 py-4 ">
         <div className="text-sm ">
           <h1 className="text-xl font-bold border-b mb-4">TRENDING</h1>

@@ -18,17 +18,17 @@ router.get("/earthquake/popular", getAllEarthquakePostsByPopularity);
 router.get("/crimes", getAllCrimePosts);
 router.get("/crimes/popular", getAllCrimePostsByPopularity);
 // router.get("/crimes/completed", getAllCrimePostsByCompleted);
-router.get("/file", savefile);
+router.post("/file", savefile);
 router.get("/latest", getAllsortBydatecreated);
 router.get("/completed", getAllByStatus);
 //ilagay mo sa taas ng /:id yung mga endpoints mo kasi yun yung rule
 
-router.get("/:id", getPostById);
-router.get("/popular/upvote", getAllPostsByPopularity);
+router.get("/popular", getAllPostsByPopularity);
 router.put("/popular/upvote/add", addupvote);
 router.put("/popular/upvote/minus", minusupvote);
 // router.get('/lastest', getAllsortBydatecreated);
 // router.get('/completed', getAllByStatus);
+router.get("/:id", getPostById);
 
 router.post("/create", createPost);
 router.put("/:id", updatePost);
@@ -65,11 +65,11 @@ function getAllsortBydatecreated(req, res, next) {
     .catch((err) => next(err));
 }
 
-function getAllByStatus(req, res, next){
-	postService
-	.getAllByStatus()
-	.then(posts => res.json(posts))
-	.catch(err => next(err));
+function getAllByStatus(req, res, next) {
+  postService
+    .getAllByStatus()
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
 }
 
 function getAllPost(req, res, next) {
@@ -133,7 +133,7 @@ function getAllCrimePostsByPopularity(req, res, next) {
 }
 function createPost(req, res, next) {
   postService
-    .createPost(req.body, req.user.sub)
+    .createPost(req.body, req.user.sub, req)
     .then(() =>
       res.json({
         created: "true",
@@ -169,9 +169,9 @@ function deleteAllPosts(req, res, next) {
     .catch((err) => next(err));
 }
 
-function savefile(req, res, next){
-    postService
-    .savefile()
-    .then(() => res.json({}))
+function savefile(req, res, next) {
+  postService
+    .savefile(req)
+    .then((data) => res.json(data))
     .catch((err) => next(err));
 }

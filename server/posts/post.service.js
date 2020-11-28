@@ -24,7 +24,7 @@ module.exports = {
   getAllCrimePosts,
   savefile,
   addupvote,
-  minusupvote
+  minusupvote,
   getAllTyphoonByPopularity,
   getAllFirePostsByPopularity,
   getAllEarthquakePostsByPopularity,
@@ -56,10 +56,14 @@ async function getPostById(id) {
 }
 
 async function getAllPostsByPopularity() {
+  return await Post.find({}).sort({ upvotes: 1 });
+}
 
-  return await Post.find({}).sort( { upvotes : 1 } );
-
-
+async function getAllTyphoonByPopularity() {
+  return await Post.find({ category: "TYPHOON" }).sort({ upvotes: -1 });
+}
+async function getAllFirePostsByPopularity() {
+  return await Post.find({ category: "FIRE" }).sort({ upvotes: -1 });
 }
 
 async function getAllEarthquakePostsByPopularity() {
@@ -78,9 +82,9 @@ async function getAllByStatus(status) {
   return await Post.find({ status: "RESCUED" });
 }
 
-async function createPost(userParam, userid) {
+async function createPost(userParam, userid, req) {
   const userData = await User.findById(userid);
-  //   console.log(userData);
+
   const post = new Post({
     user_id: userData._id,
     user_name: userData.username,
@@ -125,7 +129,7 @@ async function addupvote(id) {
   // validate
   if (!post) throw "Post not found";
   const obj = {
-    upvotes: post.upvotes + 1
+    upvotes: post.upvotes + 1,
   };
   Object.assign(post, obj);
 
@@ -136,7 +140,7 @@ async function minusupvote(id) {
   // validate
   if (!post) throw "Post not found";
   const obj = {
-    upvotes: post.upvotes - 1
+    upvotes: post.upvotes - 1,
   };
 
   Object.assign(post, obj);
@@ -163,22 +167,19 @@ async function deleteAllPosts() {
   await Post.remove({});
 }
 
-
-
 async function savefile(req) {
   if (req.files === null) {
     return { msg: "No file uploaded" };
   }
   const file = req.files.file;
-  console.log(req.files.file);
 
-  // file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
-  //   if (err) {
-  //     console.error(err);
-  //     return res.status(500).send(err);
-  //   }
-
-  //   res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
-  // });
+  file.mv(`../client/public/uploads/${file.name}`, (err) => {
+    if (err) {
+      return {
+        error: err,
+      };
+    }
+    return { fileName: file.name, filePath: `/uploads/${file.name}` };
+  });
   return;
 }
