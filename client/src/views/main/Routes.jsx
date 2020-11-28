@@ -57,7 +57,7 @@ const Main = ({ setIsAuth, setCheckingUser, currentUser, setCurrentUser }) => {
               <TagsBody currentUser={currentUser} />
             </Route>
             <Route path="/*">
-              <Maps currentUser={currentUser} />
+              <Error404 currentUser={currentUser} />
             </Route>
           </Switch>
           <Extra currentUser={currentUser} />
