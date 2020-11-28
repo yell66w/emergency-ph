@@ -46,7 +46,7 @@ export class PostService {
       const res = await API.get("/posts/popular", {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });
-      return res.data;
+      return res.data.reverse();
     } catch (error) {}
   }
   async getAllTyphoonPosts() {
@@ -131,6 +131,17 @@ export class PostService {
           headers: { Authorization: `Bearer ${localStorage.token}` },
         }
       );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async getUserPostRelationship(id) {
+    try {
+      const res = await API.get(`/posts/user/relation/${id}`, {
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+      });
+      return res.data;
     } catch (error) {
       console.error(error);
     }

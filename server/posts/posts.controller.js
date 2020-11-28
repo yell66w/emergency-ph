@@ -22,10 +22,11 @@ router.post("/file", savefile);
 router.get("/latest", getAllsortBydatecreated);
 router.get("/completed", getAllByStatus);
 //ilagay mo sa taas ng /:id yung mga endpoints mo kasi yun yung rule
-
 router.get("/popular", getAllPostsByPopularity);
 router.put("/popular/upvote/add", addupvote);
 router.put("/popular/upvote/minus", minusupvote);
+router.get("/user/relation/:id", getUserPostRelationship);
+
 // router.get('/lastest', getAllsortBydatecreated);
 // router.get('/completed', getAllByStatus);
 router.get("/:id", getPostById);
@@ -44,16 +45,23 @@ function getAllPostsByPopularity(req, res, next) {
     .catch((err) => next(err));
 }
 
+function getUserPostRelationship(req, res, next) {
+  postService
+    .getUserPostRelationship(req.params.id, req.user.sub)
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
+}
+
 function addupvote(req, res, next) {
   postService
-    .addupvote(req.body.id , req.user.sub)
+    .addupvote(req.body.id, req.user.sub)
     .then(() => res.json({}))
     .catch((err) => next(err));
 }
 
 function minusupvote(req, res, next) {
   postService
-    .minusupvote(req.body.id , req.user.sub)
+    .minusupvote(req.body.id, req.user.sub)
     .then(() => res.json({}))
     .catch((err) => next(err));
 }
