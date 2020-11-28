@@ -23,6 +23,7 @@ router.get("/latest", getAllsortBydatecreated);
 router.get("/completed", getAllByStatus);
 //ilagay mo sa taas ng /:id yung mga endpoints mo kasi yun yung rule
 router.get("/popular", getAllPostsByPopularity);
+router.get("/search/:query", getAllPostsbyQuery);
 router.put("/popular/upvote/add", addupvote);
 router.put("/popular/upvote/minus", minusupvote);
 router.get("/user/relation/:id", getUserPostRelationship);
@@ -46,8 +47,11 @@ function getAllPostsByPopularity(req, res, next) {
 }
 
 function getUserPostRelationship(req, res, next) {
+  postService.getUserPostRelationship(req.params.id, req.user.sub);
+}
+function getAllPostsbyQuery(req, res, next) {
   postService
-    .getUserPostRelationship(req.params.id, req.user.sub)
+    .getAllPostsbyQuery(req.params.query)
     .then((posts) => res.json(posts))
     .catch((err) => next(err));
 }
