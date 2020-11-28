@@ -20,20 +20,22 @@ const Post = ({ post }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [upvotes, setUpvotes] = useState(post.upvotes);
   const [isUpvoteClicked, setIsUpvoteClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const _post = new PostService();
 
   useEffect(() => {
     if (isUpvoteClicked) {
       if (isLiked) {
-        setUpvotes(upvotes + 1);
-      } else if (!isLiked) {
         setUpvotes(upvotes - 1);
+      } else if (!isLiked) {
+        setUpvotes(upvotes + 1);
       }
       setIsUpvoteClicked(false);
     }
   }, [isUpvoteClicked]);
 
   useEffect(() => {
+    setIsLoading(true);
     const getPost = async () => {
       const post = await _post.getUserPostRelationship(id);
       if (post) {
@@ -41,17 +43,22 @@ const Post = ({ post }) => {
       }
     };
     getPost();
+    setIsLoading(false);
+    console.log("rendered");
   }, []);
   const onUpvote = async () => {
     try {
-      setIsLiked(!isLiked);
-      setIsUpvoteClicked(true);
       await _post.upvote(id);
-      const post = await _post.getUserPostRelationship(id);
-      console.log(post);
+      // const post = await _post.getUserPostRelationship(id);
+      // console.log(post);
+      setIsUpvoteClicked(true);
+      setIsLiked(!isLiked);
     } catch (error) {}
   };
-  return (
+
+  return isLoading ? (
+    <div>Loading</div>
+  ) : (
     <div className="bg-white shadow rounded-lg flex flex-col mb-2 py-4">
       <div className="flex items-center px-4">
         <div className="mr-2 flex justify-center items-center text-white cursor-pointer focus:outline-none w-12 h-12 bg-red-600 bg-transparent rounded-full">

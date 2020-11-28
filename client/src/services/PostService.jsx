@@ -8,7 +8,6 @@ export class PostService {
       let tags = hashtagRegex != null ? hashtagRegex : [];
       const photo = data.photo[0];
       formData.append("file", photo);
-
       data = {
         ...data,
         upvotes: 0,

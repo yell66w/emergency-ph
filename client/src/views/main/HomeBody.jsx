@@ -18,10 +18,15 @@ const Body = ({ currentUser }) => {
     const getAllPosts = async () => {
       setIsLoading(true);
       let posts = [];
-      if (sortedBy === "POPULAR") posts = await _post.getAllPopularPosts();
-      else posts = await _post.getAllPosts();
+      try {
+        posts = await _post.getAllPosts();
+        console.log(posts);
+      } catch (error) {
+        console.log(error);
+      }
+      // if (sortedBy === "POPULAR") posts = await _post.getAllPopularPosts();
+      // else posts = await _post.getAllPosts();
       setPosts(posts);
-      console.log(posts);
       setIsLoading(false);
       setPostUpdated(false);
     };
