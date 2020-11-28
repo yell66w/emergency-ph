@@ -54,7 +54,7 @@ const Appbar = ({ onSignOut, currentUser }) => {
             className="text-red-600 cursor-pointer"
           />
           {isNotificationOpen ? (
-            <div class="origin-top-right absolute right-24 top-12 mt-2 w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+            <div class="origin-top-right absolute right-24 top-12 mt-2 w-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
               <div
                 class="py-1"
                 role="menu"
@@ -62,7 +62,7 @@ const Appbar = ({ onSignOut, currentUser }) => {
                 aria-labelledby="options-menu"
               >
                 <div
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-default"
+                  class="block px-4 py-2 tracking-normal border-b text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-default"
                   role="menuitem"
                 >
                   Notifications
@@ -75,13 +75,28 @@ const Appbar = ({ onSignOut, currentUser }) => {
                         <button
                           key={notification.id}
                           type="submit"
-                          class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
+                          class=" w-full border-b mb-2 flex flex-col text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                           role="menuitem"
                         >
-                          <span className="font-medium">
+                          <div className="flex flex-row  w-full">
+                            <span className=" text-xs">
+                              {notification.phone}
+                            </span>
+                            <p className="ml-auto text-gray-600 text-xs ">
+                              {notification.address.length > 10
+                                ? notification.address.subtring(0, 10) + "..."
+                                : notification.address}
+                            </p>
+                          </div>
+                          <span className="font-medium text-base">
                             {notification.victim_name}
-                          </span>{" "}
-                          {notification.description}
+                          </span>
+
+                          <div className="flex w-full flex-col ">
+                            <p className="text-gray-600 text-base">
+                              {notification.description}
+                            </p>
+                          </div>
                         </button>
                       );
                     })

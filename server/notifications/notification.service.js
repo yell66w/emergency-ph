@@ -4,6 +4,7 @@ const config = require("config.json");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const db = require("_helpers/db");
+const { use } = require("../posts/posts.controller");
 const User = db.User;
 const Notification = db.Notification;
 
@@ -42,6 +43,8 @@ async function create(userParam, userid) {
     victim_id: userdata.id,
     victim_name: userdata.username,
     description: userParam.description,
+    address: userParam.address,
+    phone: userParam.phone,
   });
   await notification.save();
 }

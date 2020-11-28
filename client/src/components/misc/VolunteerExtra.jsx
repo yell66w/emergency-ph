@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MdCall } from "react-icons/md";
+import { MdCall, MdNotifications } from "react-icons/md";
 import Modal from "../../components/misc/Modal";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -36,9 +36,13 @@ const VolunteerExtra = ({ volunteer, currentUser }) => {
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
-    console.log(data);
     try {
-      await _notification.alertVolunteer(data, volunteer.id);
+      await _notification.alertVolunteer(
+        data,
+        volunteer.id,
+        currentUser.address,
+        currentUser.cellphone_number
+      );
       setShowModal(false);
     } catch (error) {
     } finally {
@@ -59,10 +63,10 @@ const VolunteerExtra = ({ volunteer, currentUser }) => {
           </p>
         </div>
         <div className="ml-auto flex items-center ">
-          <MdCall
+          <MdNotifications
             onClick={() => setShowModal(true)}
             size={30}
-            className="text-green-600 cursor-pointer"
+            className="text-red-600 cursor-pointer"
           />
         </div>
       </div>
@@ -76,6 +80,10 @@ const VolunteerExtra = ({ volunteer, currentUser }) => {
           <h1 className="font-bold text-2xl text-center">
             Ask {volunteer.firstName} for Help
           </h1>
+          <p className="text-sm text-gray-600 text-center">{address}</p>
+          <p className="text-sm text-gray-600 text-center">
+            {cellphone_number}
+          </p>
           <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
             <textarea
               className={`

@@ -14,7 +14,6 @@ const Error404 = () => {
     const formData = new FormData();
     const photo = data.photo[0];
     formData.append("file", photo);
-    console.log(formData);
     try {
       await API.post("posts/file", formData, {
         headers: { Authorization: `Bearer ${localStorage.token}` },

@@ -47,7 +47,10 @@ function getAllPostsByPopularity(req, res, next) {
 }
 
 function getUserPostRelationship(req, res, next) {
-  postService.getUserPostRelationship(req.params.id, req.user.sub);
+  postService
+    .getUserPostRelationship(req.params.id, req.user.sub)
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
 }
 function getAllPostsbyQuery(req, res, next) {
   postService

@@ -20,7 +20,6 @@ const Body = ({ currentUser }) => {
       let posts = [];
       try {
         posts = await _post.getAllPosts();
-        console.log(posts);
       } catch (error) {
         console.log(error);
       }

@@ -53,7 +53,6 @@ export class PostService {
       const res = await API.get("/posts/typhoon", {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });
-      console.log(res.data);
       return res.data.reverse();
     } catch (error) {}
   }
@@ -62,7 +61,6 @@ export class PostService {
       const res = await API.get("/posts/typhoon/popular", {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });
-      console.log(res.data);
       return res.data;
     } catch (error) {}
   }
@@ -71,7 +69,6 @@ export class PostService {
       const res = await API.get("/posts/fire/popular", {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });
-      console.log(res.data);
       return res.data;
     } catch (error) {}
   }
@@ -80,7 +77,6 @@ export class PostService {
       const res = await API.get("/posts/earthquake/popular", {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });
-      console.log(res.data);
       return res.data;
     } catch (error) {}
   }
@@ -89,7 +85,6 @@ export class PostService {
       const res = await API.get("/posts/crimes/popular", {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });
-      console.log(res.data);
       return res.data;
     } catch (error) {}
   }
@@ -99,7 +94,6 @@ export class PostService {
       const res = await API.get("/posts/fire", {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });
-      console.log(res.data);
       return res.data.reverse();
     } catch (error) {}
   }
@@ -108,7 +102,6 @@ export class PostService {
       const res = await API.get("/posts/earthquake", {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });
-      console.log(res.data);
       return res.data.reverse();
     } catch (error) {}
   }
@@ -117,7 +110,6 @@ export class PostService {
       const res = await API.get("/posts/crimes", {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });
-      console.log(res.data);
       return res.data.reverse();
     } catch (error) {}
   }

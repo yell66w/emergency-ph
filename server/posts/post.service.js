@@ -34,6 +34,10 @@ module.exports = {
   getUserPostRelationship,
 };
 
+async function getUserPostRelationship(post_id, user_id) {
+  return await Upvote.findOne({ post_id, user_id });
+}
+
 async function getAllPost() {
   return await Post.find();
 }
@@ -63,7 +67,9 @@ async function getAllPostsByPopularity() {
 }
 
 async function getAllPostsbyQuery(query, post_description) {
-	return await Post.find({post_description: {'$regex' : '.*' + query + '.*', '$options' : 'i' }});
+  return await Post.find({
+    post_description: { $regex: ".*" + query + ".*", $options: "i" },
+  });
 }
 
 async function getAllTyphoonByPopularity() {
@@ -130,11 +136,6 @@ async function createPost(userParam, userid, req) {
 
   // save user
   await post.save();
-}
-
-async function getUserPostRelationship(postid, userid) {
-  const oldupvote = await Upvote.findOne({ post_id: postid, user_id: userid });
-  return oldupvote;
 }
 
 async function addupvote(postid, userid) {

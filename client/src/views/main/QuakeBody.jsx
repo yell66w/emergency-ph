@@ -21,7 +21,6 @@ const QuakeBody = ({ currentUser }) => {
       if (sortedBy === "POPULAR")
         posts = await _post.getAllEarthquakePostsByPopularity();
       else posts = await _post.getAllQuakePosts();
-      console.log(posts);
       setPosts(posts);
       setIsLoading(false);
       setPostUpdated(false);
