@@ -17,14 +17,14 @@ const Post = ({ post }) => {
     photos,
     status,
     upvotes,
-    _id,
+    id,
   } = post;
 
   const _post = new PostService();
 
   const onUpvote = async () => {
     try {
-      _post.upvote(_id);
+      _post.upvote(id);
     } catch (error) {}
   };
   return (

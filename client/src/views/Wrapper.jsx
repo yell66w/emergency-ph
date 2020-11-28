@@ -23,6 +23,12 @@ const Wrapper = () => {
       checkAuthenticated();
     }
   }, [checkingUser]);
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+  }, []);
 
   if (checkingUser || isLoading) {
     return <Loading desc={"Loading"} />;

@@ -124,6 +124,15 @@ export class PostService {
   }
   async upvote(id) {
     try {
-    } catch (error) {}
+      const res = await API.put(
+        "/posts/popular/upvote/add",
+        { id },
+        {
+          headers: { Authorization: `Bearer ${localStorage.token}` },
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
