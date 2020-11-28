@@ -46,14 +46,14 @@ function getAllPostsByPopularity(req, res, next) {
 
 function addupvote(req, res, next) {
   postService
-    .addupvote(req.body.id)
+    .addupvote(req.body.id , req.user.sub)
     .then(() => res.json({}))
     .catch((err) => next(err));
 }
 
 function minusupvote(req, res, next) {
   postService
-    .minusupvote(req.body.id)
+    .minusupvote(req.body.id , req.user.sub)
     .then(() => res.json({}))
     .catch((err) => next(err));
 }
