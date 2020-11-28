@@ -4,6 +4,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Routes from "./main/Routes";
 import Loading from "./loading/Loading";
+import { calculateDistance, myLocation } from "../services/Haversine";
 
 const Wrapper = () => {
   const [checkingUser, setCheckingUser] = useState(true);
@@ -23,12 +24,7 @@ const Wrapper = () => {
       checkAuthenticated();
     }
   }, [checkingUser]);
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
-    });
-  }, []);
+  useEffect(() => {}, []);
 
   if (checkingUser || isLoading) {
     return <Loading desc={"Loading"} />;

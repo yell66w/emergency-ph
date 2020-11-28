@@ -115,7 +115,11 @@ const Extra = ({ currentUser }) => {
             volunteers.map((volunteer) => {
               if (currentUser.id !== volunteer.id) {
                 return (
-                  <VolunteerExtra key={volunteer.id} volunteer={volunteer} />
+                  <VolunteerExtra
+                    currentUser={currentUser}
+                    key={volunteer.id}
+                    volunteer={volunteer}
+                  />
                 );
               }
             })

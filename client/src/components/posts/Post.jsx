@@ -10,6 +10,7 @@ const Post = ({ post }) => {
     user_id,
     user_first_name,
     user_last_name,
+    user_address,
     user_name,
     category,
     post_description,
@@ -40,9 +41,7 @@ const Post = ({ post }) => {
             </h1>
           </div>
 
-          <p className="text-xs text-gray-400">
-            Barangay 80, Bagumbayan, Tacloban City, Leyte
-          </p>
+          <p className="text-xs text-gray-400">{user_address}</p>
         </div>
         <div className="ml-auto rounded-full w-auto px-4 py-2 text-xs flex items-center justify-center font-medium bg-red-600 text-white">
           {category}

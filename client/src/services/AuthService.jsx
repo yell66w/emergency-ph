@@ -21,7 +21,9 @@ export class AuthService {
     password,
     role,
     cellphone_number,
-    address
+    address,
+    lat,
+    lng
   ) {
     try {
       const res = await API.post("/users/register", {
@@ -32,6 +34,8 @@ export class AuthService {
         role,
         cellphone_number,
         address,
+        lat,
+        lng,
       });
     } catch (error) {
       throw {
