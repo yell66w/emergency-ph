@@ -32,6 +32,15 @@ export class PostService {
       return res.data.reverse();
     } catch (error) {}
   }
+
+  async getAllPopularPosts() {
+    try {
+      const res = await API.get("/posts/popular", {
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+      });
+      return res.data;
+    } catch (error) {}
+  }
   async getAllTyphoonPosts() {
     try {
       const res = await API.get("/posts/typhoon", {
@@ -41,6 +50,43 @@ export class PostService {
       return res.data.reverse();
     } catch (error) {}
   }
+  async getAllTyphoonPostsByPopularity() {
+    try {
+      const res = await API.get("/posts/typhoon/popular", {
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+      });
+      console.log(res.data);
+      return res.data;
+    } catch (error) {}
+  }
+  async getAllFirePostsByPopularity() {
+    try {
+      const res = await API.get("/posts/fire/popular", {
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+      });
+      console.log(res.data);
+      return res.data;
+    } catch (error) {}
+  }
+  async getAllEarthquakePostsByPopularity() {
+    try {
+      const res = await API.get("/posts/earthquake/popular", {
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+      });
+      console.log(res.data);
+      return res.data;
+    } catch (error) {}
+  }
+  async getAllCrimePostsByPopularity() {
+    try {
+      const res = await API.get("/posts/crimes/popular", {
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+      });
+      console.log(res.data);
+      return res.data;
+    } catch (error) {}
+  }
+
   async getAllFirePosts() {
     try {
       const res = await API.get("/posts/fire", {
@@ -66,6 +112,10 @@ export class PostService {
       });
       console.log(res.data);
       return res.data.reverse();
+    } catch (error) {}
+  }
+  async upvote(id) {
+    try {
     } catch (error) {}
   }
 }

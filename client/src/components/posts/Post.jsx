@@ -2,6 +2,8 @@ import React from "react";
 import Hashtag from "../misc/Hashtag";
 import bagyo from "../../assets/img/bagyo.jpg";
 import { MdThumbUp } from "react-icons/md";
+import { AiFillNotification, AiOutlineNotification } from "react-icons/ai";
+import { PostService } from "../../services/PostService";
 
 const Post = ({ post }) => {
   const {
@@ -15,7 +17,16 @@ const Post = ({ post }) => {
     photos,
     status,
     upvotes,
+    _id,
   } = post;
+
+  const _post = new PostService();
+
+  const onUpvote = async () => {
+    try {
+      _post.upvote(_id);
+    } catch (error) {}
+  };
   return (
     <div className="bg-white shadow rounded-lg flex flex-col mb-2 p-4">
       <div className="flex items-center ">
@@ -53,7 +64,11 @@ const Post = ({ post }) => {
         />
       </div>
       <div className="mt-3 flex  items-center">
-        <MdThumbUp className="text-red-600 mr-2" size={20} />
+        <AiFillNotification
+          onClick={onUpvote}
+          className="text-gray-400 cursor-pointer transition duration-300 hover:text-red-600 mr-2"
+          size={30}
+        />
         <p className="text-gray-700">{upvotes}</p>
       </div>
     </div>

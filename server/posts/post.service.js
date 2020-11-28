@@ -22,7 +22,11 @@ module.exports = {
   getAllFirePosts,
   getAllEarthquakePosts,
   getAllCrimePosts,
-  savefile
+  savefile,
+  getAllTyphoonByPopularity,
+  getAllFirePostsByPopularity,
+  getAllEarthquakePostsByPopularity,
+  getAllCrimePostsByPopularity,
 };
 
 async function getAllPost() {
@@ -50,15 +54,30 @@ async function getPostById(id) {
 }
 
 async function getAllPostsByPopularity() {
-  return await Post.find({}).sort( { upvotes : -1 } );
+  return await Post.find({}).sort({ upvotes: -1 });
+}
+async function getAllTyphoonByPopularity() {
+  return await Post.find({ category: "TYPHOON" }).sort({ upvotes: -1 });
 }
 
+async function getAllFirePostsByPopularity() {
+  return await Post.find({ category: "FIRE" }).sort({ upvotes: -1 });
+}
+
+async function getAllEarthquakePostsByPopularity() {
+  return await Post.find({ category: "EARTHQUAKE" }).sort({ upvotes: -1 });
+}
+async function getAllCrimePostsByPopularity() {
+  return await Post.find({ category: "CRIME" }).sort({ upvotes: -1 });
+}
 async function getAllsortBydatecreated(created_date) {
-  return await Post.find({created_date:{$exists:true}}).sort({created_date: -1});
+  return await Post.find({ created_date: { $exists: true } }).sort({
+    created_date: -1,
+  });
 }
 
 async function getAllByStatus(status) {
-  return await Post.find({status: "RESCUED"});
+  return await Post.find({ status: "RESCUED" });
 }
 
 async function createPost(userParam, userid) {
@@ -121,13 +140,13 @@ async function deletePost(id) {
 async function deleteAllPosts() {
   await Post.remove({});
 }
-savefile
+savefile;
 async function savefile(req) {
   if (req.files === null) {
-    return { msg: 'No file uploaded' };
+    return { msg: "No file uploaded" };
   }
   const file = req.files.file;
-  console.log(req.files.file)
+  console.log(req.files.file);
 
   // file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
   //   if (err) {
@@ -137,5 +156,5 @@ async function savefile(req) {
 
   //   res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
   // });
-  return
+  return;
 }
