@@ -19,14 +19,14 @@ const SortTab = ({ sortedBy, setSortedBy }) => {
       >
         Popular
       </button>
-      <button
+      {/* <button
         onClick={() => setSortedBy("UPDATES")}
         className={`${
           sortedBy == "UPDATES" ? "font-bold " : "bg-transparent text-gray-800"
         } transition duration-300  focus:outline-none  ml-2 w-20 flex    px-2 text-sm font-medium items-center justify-center py-1`}
       >
         Updates
-      </button>
+      </button> */}
     </div>
   );
 };

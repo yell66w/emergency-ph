@@ -8,9 +8,12 @@ export class NotificationService {
       return res.data.reverse();
     } catch (error) {}
   }
-  async alertVolunteer(data, volunteer_id) {
+  async alertVolunteer(data, volunteer_id, address, phone) {
     try {
       data = { ...data, volunteer_id };
+      data = { ...data, address };
+      data = { ...data, phone };
+      console.log(data);
       const res = await API.post("/notifications/create", data, {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });

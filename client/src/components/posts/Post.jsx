@@ -28,8 +28,11 @@ const Post = ({ post }) => {
       try {
         const post = await _post.getUserPostRelationship(id);
         setIsLiked(post.liked);
+      } catch (error) {
+        setIsLiked(false);
+      } finally {
         setIsLoading(false);
-      } catch (error) {}
+      }
     };
     getUserPostRelationship();
   }, []);
