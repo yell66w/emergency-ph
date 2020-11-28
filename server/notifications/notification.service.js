@@ -1,10 +1,10 @@
 //DITO NIYO ILALAGAY YUNG PINAKA LOGIC TALAGA WALANG ROUTING MGA FUNCTION LANG 
 
 
-const config = require('config.json');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const db = require('_helpers/db');
+const config = require("config.json");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const db = require("_helpers/db");
 const User = db.User;
 const Notification = db.Notification;
 
@@ -18,7 +18,7 @@ module.exports = {
 };
 
 async function getAll() {
-    return await Notification.find();
+  return await Notification.find();
 }
 
 async function getByIdVolunteer(id) {
@@ -26,8 +26,13 @@ async function getByIdVolunteer(id) {
 }
 
 async function getById(id) {
-    return await Notification.findById(id);
+  return await Notification.findById(id);
 }
+
+async function getMyNotifications(volunteer_id) {
+  return await Notification.find({ volunteer_id });
+}
+
 
 async function create(userParam , userid) {
     const userdata = await User.findById(userid);
@@ -40,16 +45,17 @@ async function create(userParam , userid) {
         description: userParam.description,
     });
     await notification.save();
+
 }
 
 async function update(id, userParam) {
-    const notification = await Notification.findById(id);
-    // copy userParam properties to user
-    Object.assign(notification, userParam);
+  const notification = await Notification.findById(id);
+  // copy userParam properties to user
+  Object.assign(notification, userParam);
 
-    await notification.save();
+  await notification.save();
 }
 
 async function _delete(id) {
-    await Notification.findByIdAndRemove(id);
+  await Notification.findByIdAndRemove(id);
 }

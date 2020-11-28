@@ -1,5 +1,5 @@
 ﻿//DITO NIYO ILALAGAY YUNG MGA ROUTES TAPOS YUNG MGA FUNCTION NA GAGAMITIN NYA SA SERVICE
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const notificationService = require('./notification.service');
 

@@ -15,7 +15,7 @@ const CreatePost = ({ currentUser, setShowModal }) => {
           className="transition duration-300 ease-in-out bg-gray-100 hover:bg-gray-200 focus:outline-none w-full rounded-full px-4 py-2 cursor-pointer flex items-center justify-start"
         >
           <p className="text-gray-500">
-            What's on your mind, {currentUser.firstName}
+            What's wrong, {currentUser.firstName}?
           </p>
         </button>
       </div>
