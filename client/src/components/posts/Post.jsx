@@ -59,7 +59,7 @@ const Post = ({ post }) => {
       <div className="mt-3">
         <img
           src={process.env.PUBLIC_URL + `/uploads/${photos[0]}`}
-          className="object-cover h-1/2 w-full "
+          className="object-cover h-96 w-full "
           alt=""
         />
       </div>
