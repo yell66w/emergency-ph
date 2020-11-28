@@ -20,6 +20,7 @@ module.exports = {
   getAllFirePosts,
   getAllEarthquakePosts,
   getAllCrimePosts,
+  savefile
 };
 
 async function getAllPost() {
@@ -46,8 +47,8 @@ async function getPostById(id) {
   return await Post.findById(id);
 }
 
-async function getAllPostsByPopularity(upvotes) {
-  return await Post.find({ upvotes: 0 });
+async function getAllPostsByPopularity() {
+  return await Post.find({}).sort( { upvotes : -1 } );
 }
 
 async function createPost(userParam, userid) {
@@ -109,4 +110,22 @@ async function deletePost(id) {
 }
 async function deleteAllPosts() {
   await Post.remove({});
+}
+savefile
+async function savefile(req) {
+  if (req.files === null) {
+    return { msg: 'No file uploaded' };
+  }
+  const file = req.files.file;
+  console.log(req.files.file)
+
+  // file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
+  //   if (err) {
+  //     console.error(err);
+  //     return res.status(500).send(err);
+  //   }
+
+  //   res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+  // });
+  return
 }

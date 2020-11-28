@@ -10,11 +10,12 @@ router.get("/typhoon", getAllTyphoonPosts);
 router.get("/fire", getAllFirePosts);
 router.get("/earthquake", getAllEarthquakePosts);
 router.get("/crimes", getAllCrimePosts);
+router.get("/file", savefile);
 
 //ilagay mo sa taas ng /:id yung mga endpoints mo kasi yun yung rule
 
 router.get("/:id", getPostById);
-router.get("/popular", getAllPostsByPopularity);
+router.get("/popular/upvote", getAllPostsByPopularity);
 // router.get('/lastest', getAllsortBydatecreated);
 // router.get('/completed', getAllByStatus);
 router.post("/create", createPost);
@@ -95,6 +96,13 @@ function deletePost(req, res, next) {
 function deleteAllPosts(req, res, next) {
   postService
     .deleteAllPosts()
+    .then(() => res.json({}))
+    .catch((err) => next(err));
+}
+
+function savefile(req, res, next){
+    postService
+    .savefile()
     .then(() => res.json({}))
     .catch((err) => next(err));
 }

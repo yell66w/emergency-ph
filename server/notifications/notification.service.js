@@ -1,4 +1,4 @@
-﻿//DITO NIYO ILALAGAY YUNG PINAKA LOGIC TALAGA WALANG ROUTING MGA FUNCTION LANG 
+//DITO NIYO ILALAGAY YUNG PINAKA LOGIC TALAGA WALANG ROUTING MGA FUNCTION LANG 
 
 
 const config = require('config.json');
@@ -10,6 +10,7 @@ const Notification = db.Notification;
 
 module.exports = {
     getAll,
+    getByIdVolunteer,
     getById,
     create,
     update,
@@ -18,6 +19,10 @@ module.exports = {
 
 async function getAll() {
     return await Notification.find();
+}
+
+async function getByIdVolunteer(id) {
+    return await Notification.find({volunteer_id:id});
 }
 
 async function getById(id) {
@@ -33,8 +38,7 @@ async function create(userParam , userid) {
         victim_id: userdata.id,
         victim_name: userdata.username,
         description: userParam.description,
-    })
-    console.log(volunterdata)
+    });
     await notification.save();
 }
 
