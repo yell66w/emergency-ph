@@ -48,13 +48,13 @@ const Sidebar = () => {
           <RiPoliceCarFill size={30} className="mr-3" />
           Crimes
         </Link>
-        <Link
+        {/* <Link
           to="/volunteer"
           className="font-bold  focus:bg-gray-200 mb-1 flex items-center py-4 px-4 rounded-lg hover:bg-gray-200"
         >
           <BsPeopleFill size={30} className="mr-3" />
           Volunteers
-        </Link>
+        </Link> */}
       </ul>
     </div>
   );
