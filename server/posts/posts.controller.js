@@ -24,6 +24,7 @@ router.get("/completed", getAllByStatus);
 //ilagay mo sa taas ng /:id yung mga endpoints mo kasi yun yung rule
 
 router.get("/popular", getAllPostsByPopularity);
+router.get("/search/:query", getAllPostsbyQuery);
 router.put("/popular/upvote/add", addupvote);
 router.put("/popular/upvote/minus", minusupvote);
 // router.get('/lastest', getAllsortBydatecreated);
@@ -40,6 +41,13 @@ module.exports = router;
 function getAllPostsByPopularity(req, res, next) {
   postService
     .getAllPostsByPopularity()
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
+}
+
+function getAllPostsbyQuery(req, res, next) {
+  postService
+    .getAllPostsbyQuery(req.params.query)
     .then((posts) => res.json(posts))
     .catch((err) => next(err));
 }
