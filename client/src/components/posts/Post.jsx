@@ -3,6 +3,7 @@ import HashtagPost from "../misc/HashtagPost";
 import { AiFillNotification } from "react-icons/ai";
 import { PostService } from "../../services/PostService";
 import Spinner from "react-spinners/BounceLoader";
+import { API } from "../../utils/API";
 
 const Post = ({ post }) => {
   const {
@@ -21,6 +22,18 @@ const Post = ({ post }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [upvotes, setUpvotes] = useState(post.upvotes);
   const _post = new PostService();
+  const [photo, setPhoto] = useState("");
+
+  useEffect(() => {
+    const getRandomUser = async () => {
+      try {
+        const res = await API.get("https://randomuser.me/api/");
+        setPhoto(res.data.results[0].picture.thumbnail);
+      } catch (error) {}
+    };
+    console.log(post);
+    getRandomUser();
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -44,6 +57,7 @@ const Post = ({ post }) => {
       } else {
         setUpvotes(upvotes - 1);
       }
+      setIsUpvoteClicked(false);
     }
   }, [isUpvoteClicked]);
 
@@ -61,9 +75,12 @@ const Post = ({ post }) => {
   ) : (
     <div className="bg-white shadow rounded-lg flex flex-col mb-2 py-4">
       <div className="flex items-center px-4">
-        <div className="mr-2 flex justify-center items-center text-white cursor-pointer focus:outline-none w-12 h-12 bg-red-600 bg-transparent rounded-full">
-          <p className="text-lg">Y</p>
-        </div>
+        <img
+          src={photo}
+          className="mr-2 flex justify-center items-center text-white cursor-pointer focus:outline-none w-12 h-12 bg-transparent rounded-full"
+          alt=""
+        />
+
         <div className="flex flex-col">
           <div className="flex">
             <h1 className="font-semibold ">
@@ -88,7 +105,7 @@ const Post = ({ post }) => {
       <div className="mt-3">
         <img
           src={process.env.PUBLIC_URL + `/uploads/${photos[0]}`}
-          className="object-cover h-96 w-full "
+          className="object-cover h-1/6 w-full "
           alt=""
         />
       </div>

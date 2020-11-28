@@ -63,7 +63,7 @@ async function getPostById(id) {
 }
 
 async function getAllPostsByPopularity() {
-  return await Post.find({}).sort({ upvotes: 1 });
+  return await Post.find({}).sort({ upvotes: -1 });
 }
 
 async function getAllPostsbyQuery(query, post_description) {

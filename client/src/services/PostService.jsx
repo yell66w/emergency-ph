@@ -45,7 +45,7 @@ export class PostService {
       const res = await API.get("/posts/popular", {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });
-      return res.data.reverse();
+      return res.data;
     } catch (error) {}
   }
   async getAllTyphoonPosts() {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MdNotifications, MdCreate } from "react-icons/md";
+import { MdNotifications } from "react-icons/md";
 import { NotificationService } from "../../services/NotificationService";
 const Appbar = ({ onSignOut, currentUser }) => {
   const [isAccountButtonOpen, setIsAccountButtonOpen] = useState(false);
@@ -36,17 +36,15 @@ const Appbar = ({ onSignOut, currentUser }) => {
         <span className="text-gray-800">Emergency</span>PH
       </h1>
       <div className="ml-4 w-full">
-        <input
+        {/* <input
           className="bg-gray-200 text-xs font-medium rounded-full px-4 py-3 w-64 focus:outline-none"
           type="search"
           placeholder="Search..."
-        />
+        /> */}
       </div>
 
       <ul className="flex ml-auto items-center text-sm font-medium">
-        <li className="px-2">
-          <MdCreate size={25} className="text-red-600 cursor-pointer" />
-        </li>
+        <li className="px-2"></li>
         <li className="px-2">
           <MdNotifications
             onClick={onNotifClick}
@@ -78,14 +76,12 @@ const Appbar = ({ onSignOut, currentUser }) => {
                           class=" w-full border-b mb-2 flex flex-col text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                           role="menuitem"
                         >
-                          <div className="flex flex-row  w-full">
+                          <div className="flex flex-row  w-full mb-4">
                             <span className=" text-xs">
                               {notification.phone}
                             </span>
                             <p className="ml-auto text-gray-600 text-xs ">
-                              {notification.address.length > 10
-                                ? notification.address.subtring(0, 10) + "..."
-                                : notification.address}
+                              {notification.address}
                             </p>
                           </div>
                           <span className="font-medium text-base">
@@ -125,12 +121,12 @@ const Appbar = ({ onSignOut, currentUser }) => {
                 aria-orientation="vertical"
                 aria-labelledby="options-menu"
               >
-                <div
+                {/* <div
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                   role="menuitem"
                 >
                   Account settings
-                </div>
+                </div> */}
 
                 <button
                   onClick={onSignOut}
