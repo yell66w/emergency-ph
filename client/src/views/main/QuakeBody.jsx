@@ -36,22 +36,25 @@ const QuakeBody = ({ currentUser }) => {
   useEffect(() => {
     const getAllPosts = async () => {
       setIsLoading(true);
-      const posts = await _post.getAllQuakePosts();
+      let posts = [];
+      if (sortedBy === "POPULAR")
+        posts = await _post.getAllEarthquakePostsByPopularity();
+      else posts = await _post.getAllQuakePosts();
       console.log(posts);
       setPosts(posts);
       setIsLoading(false);
       setPostUpdated(false);
     };
-    if (postUpdated) {
+    if (postUpdated || sortedBy) {
       getAllPosts();
     }
-  }, [postUpdated]);
+  }, [postUpdated, sortedBy]);
 
   return (
     <>
       <div className="w-3/5  px-4 pt-2">
         <CreatePost currentUser={currentUser} setShowModal={setShowModal} />
-        <SortTab />
+        <SortTab setSortedBy={setSortedBy} sortedBy={sortedBy} />
 
         <div className="bg-transparent rounded-lg mt-4 flex flex-col">
           {isLoading ? (

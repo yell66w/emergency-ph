@@ -68,22 +68,26 @@ const Appbar = ({ onSignOut, currentUser }) => {
                   Notifications
                 </div>
 
-                {notifications.length > 0 ? (
-                  notifications.map((notification) => {
-                    return (
-                      <button
-                        key={notification.id}
-                        type="submit"
-                        class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
-                        role="menuitem"
-                      >
-                        <span className="font-medium">
-                          {notification.victim_name}
-                        </span>{" "}
-                        {notification.description}
-                      </button>
-                    );
-                  })
+                {notifications != null || notifications != undefined ? (
+                  notifications.length > 0 ? (
+                    notifications.map((notification) => {
+                      return (
+                        <button
+                          key={notification.id}
+                          type="submit"
+                          class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
+                          role="menuitem"
+                        >
+                          <span className="font-medium">
+                            {notification.victim_name}
+                          </span>{" "}
+                          {notification.description}
+                        </button>
+                      );
+                    })
+                  ) : (
+                    <p className="px-4 font-normal pb-2">No Notifications</p>
+                  )
                 ) : (
                   <p className="px-4 font-normal pb-2">No Notifications</p>
                 )}

@@ -36,22 +36,25 @@ const FireBody = ({ currentUser }) => {
   useEffect(() => {
     const getAllPosts = async () => {
       setIsLoading(true);
-      const posts = await _post.getAllFirePosts();
-      console.log(posts);
+      let posts = [];
+      if (sortedBy === "POPULAR")
+        posts = await _post.getAllFirePostsByPopularity();
+      else posts = await _post.getAllFirePosts();
       setPosts(posts);
       setIsLoading(false);
       setPostUpdated(false);
     };
-    if (postUpdated) {
+    if (postUpdated || sortedBy) {
       getAllPosts();
     }
-  }, [postUpdated]);
+  }, [postUpdated, sortedBy]);
 
   return (
     <>
       <div className="w-3/5  px-4 pt-2">
         <CreatePost currentUser={currentUser} setShowModal={setShowModal} />
-        <SortTab />
+        <SortTab setSortedBy={setSortedBy} sortedBy={sortedBy} />
+
         <div className="bg-transparent rounded-lg mt-4 flex flex-col">
           {isLoading ? (
             <div className="flex items-center justify-center h-full min-h-screen ">
