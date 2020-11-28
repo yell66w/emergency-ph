@@ -36,7 +36,6 @@ const VolunteerExtra = ({ volunteer, currentUser }) => {
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
-    console.log(data);
     try {
       await _notification.alertVolunteer(data, volunteer.id);
       setShowModal(false);

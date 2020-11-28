@@ -17,8 +17,3 @@ if (typeof Number.prototype.toRad === "undefined") {
     return (this * Math.PI) / 180;
   };
 }
-// export const calculateDistance = (lng = 0, lat = 0) => {
-//   window.navigator.geolocation.getCurrentPosition(function (pos) {
-//     console.log(distance(pos.coords.longitude, pos.coords.latitude, lng, lat));
-//   });
-// };

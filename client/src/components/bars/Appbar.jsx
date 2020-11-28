@@ -11,7 +11,6 @@ const Appbar = ({ onSignOut, currentUser }) => {
     const getAllMyNotifications = async () => {
       try {
         const res = await _notifications.getAllMyNotifications();
-        console.log(res);
         setNotifications(res);
       } catch (error) {}
     };

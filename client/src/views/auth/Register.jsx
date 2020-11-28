@@ -23,8 +23,6 @@ const Register = ({ setShowSignIn }) => {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
 
-    console.log(coords);
-
     try {
       const {
         username,

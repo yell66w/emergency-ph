@@ -2,62 +2,59 @@ import React, { useEffect, useState } from "react";
 import HashtagPost from "../misc/HashtagPost";
 import { AiFillNotification } from "react-icons/ai";
 import { PostService } from "../../services/PostService";
+import Spinner from "react-spinners/BounceLoader";
 
 const Post = ({ post }) => {
   const {
-    user_id,
     user_first_name,
     user_last_name,
     user_address,
-    user_name,
     category,
-    post_description,
+    user_id,
     tags,
     photos,
-    status,
+    post_description,
     id,
   } = post;
   const [isLiked, setIsLiked] = useState(false);
-  const [upvotes, setUpvotes] = useState(post.upvotes);
   const [isUpvoteClicked, setIsUpvoteClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [upvotes, setUpvotes] = useState(post.upvotes);
   const _post = new PostService();
+
+  useEffect(() => {
+    setIsLoading(true);
+    const getUserPostRelationship = async () => {
+      try {
+        const post = await _post.getUserPostRelationship(id);
+        setIsLiked(post.liked);
+        setIsLoading(false);
+      } catch (error) {}
+    };
+    getUserPostRelationship();
+  }, []);
 
   useEffect(() => {
     if (isUpvoteClicked) {
       if (isLiked) {
-        setUpvotes(upvotes - 1);
-      } else if (!isLiked) {
         setUpvotes(upvotes + 1);
+      } else {
+        setUpvotes(upvotes - 1);
       }
-      setIsUpvoteClicked(false);
     }
   }, [isUpvoteClicked]);
 
-  useEffect(() => {
-    setIsLoading(true);
-    const getPost = async () => {
-      const post = await _post.getUserPostRelationship(id);
-      if (post) {
-        setIsLiked(post.liked);
-      }
-    };
-    getPost();
-    setIsLoading(false);
-    console.log("rendered");
-  }, []);
   const onUpvote = async () => {
     try {
-      await _post.upvote(id);
-      // const post = await _post.getUserPostRelationship(id);
-      // console.log(post);
-      setIsUpvoteClicked(true);
       setIsLiked(!isLiked);
+      setIsUpvoteClicked(true);
+      await _post.upvote(id);
     } catch (error) {}
   };
-
   return isLoading ? (
-    <div>Loading</div>
+    <div className="bg-white items-center justify-center shadow rounded-lg flex flex-col mb-2 py-4 h-96">
+      <Spinner color={"#E5E7EB"} />
+    </div>
   ) : (
     <div className="bg-white shadow rounded-lg flex flex-col mb-2 py-4">
       <div className="flex items-center px-4">
