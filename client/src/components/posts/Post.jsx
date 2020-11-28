@@ -1,8 +1,6 @@
-import React from "react";
-import Hashtag from "../misc/Hashtag";
-import bagyo from "../../assets/img/bagyo.jpg";
-import { MdThumbUp } from "react-icons/md";
-import { AiFillNotification, AiOutlineNotification } from "react-icons/ai";
+import React, { useEffect, useState } from "react";
+import HashtagPost from "../misc/HashtagPost";
+import { AiFillNotification } from "react-icons/ai";
 import { PostService } from "../../services/PostService";
 
 const Post = ({ post }) => {
@@ -17,18 +15,50 @@ const Post = ({ post }) => {
     tags,
     photos,
     status,
-    upvotes,
     id,
   } = post;
-
+  const [isLiked, setIsLiked] = useState(false);
+  const [upvotes, setUpvotes] = useState(post.upvotes);
+  const [isUpvoteClicked, setIsUpvoteClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const _post = new PostService();
 
+  useEffect(() => {
+    if (isUpvoteClicked) {
+      if (isLiked) {
+        setUpvotes(upvotes - 1);
+      } else if (!isLiked) {
+        setUpvotes(upvotes + 1);
+      }
+      setIsUpvoteClicked(false);
+    }
+  }, [isUpvoteClicked]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const getPost = async () => {
+      const post = await _post.getUserPostRelationship(id);
+      if (post) {
+        setIsLiked(post.liked);
+      }
+    };
+    getPost();
+    setIsLoading(false);
+    console.log("rendered");
+  }, []);
   const onUpvote = async () => {
     try {
-      _post.upvote(id);
+      await _post.upvote(id);
+      // const post = await _post.getUserPostRelationship(id);
+      // console.log(post);
+      setIsUpvoteClicked(true);
+      setIsLiked(!isLiked);
     } catch (error) {}
   };
-  return (
+
+  return isLoading ? (
+    <div>Loading</div>
+  ) : (
     <div className="bg-white shadow rounded-lg flex flex-col mb-2 py-4">
       <div className="flex items-center px-4">
         <div className="mr-2 flex justify-center items-center text-white cursor-pointer focus:outline-none w-12 h-12 bg-red-600 bg-transparent rounded-full">
@@ -52,7 +82,7 @@ const Post = ({ post }) => {
       </div>
       <div className="mt-3 flex flex-row px-4">
         {tags.map((tag) => {
-          return <Hashtag key={`${user_id}${tag}`} name={tag} />;
+          return <HashtagPost key={`${user_id}${tag}`} name={tag} />;
         })}
       </div>
       <div className="mt-3">
@@ -65,7 +95,9 @@ const Post = ({ post }) => {
       <div className="mt-3 flex  items-center px-4">
         <AiFillNotification
           onClick={onUpvote}
-          className="text-gray-400 cursor-pointer transition duration-300 hover:text-red-600 mr-2"
+          className={`${
+            isLiked ? "text-red-600" : "text-gray-400"
+          } cursor-pointer transition duration-300 hover:text-red-600 mr-2`}
           size={30}
         />
         <p className="text-gray-700">{upvotes}</p>

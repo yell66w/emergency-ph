@@ -28,7 +28,7 @@ const Error404 = () => {
     }
   };
   return (
-    <div className="w-3/5  px-4 pt-2">
+    <div className="w-9/12  px-4 pt-2">
       <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full flex  items-center justify-center">
           <label className="w-full bg-gray-100 mt-4 flex flex-col items-center justify-center px-4 py-6  text-blue rounded-lg tracking-wide uppercase  cursor-pointer hover:bg-gray-200 hover:text-white">

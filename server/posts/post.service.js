@@ -31,6 +31,7 @@ module.exports = {
   getAllFirePostsByPopularity,
   getAllEarthquakePostsByPopularity,
   getAllCrimePostsByPopularity,
+  getUserPostRelationship,
 };
 
 async function getAllPost() {
@@ -131,8 +132,14 @@ async function createPost(userParam, userid, req) {
   await post.save();
 }
 
+async function getUserPostRelationship(postid, userid) {
+  const oldupvote = await Upvote.findOne({ post_id: postid, user_id: userid });
+  return oldupvote;
+}
+
 async function addupvote(postid, userid) {
   const oldupvote = await Upvote.findOne({ post_id: postid, user_id: userid });
+
   if (oldupvote == null) {
     //adding up new vote
     const upvote = new Upvote({
@@ -165,7 +172,19 @@ async function addupvote(postid, userid) {
       };
       Object.assign(post, obj);
       await post.save();
-    } else {
+    } else if (oldupvote.liked == true) {
+      const upvote = { liked: false };
+      // copy upvote properties to oldupvote
+      Object.assign(oldupvote, upvote);
+      await oldupvote.save();
+      const post = await Post.findById(postid);
+      // validate
+      if (!post) throw "Post not found";
+      const obj = {
+        upvotes: post.upvotes - 1,
+      };
+      Object.assign(post, obj);
+      await post.save();
       //nothing
     }
   }

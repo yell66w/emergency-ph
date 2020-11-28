@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const Hashtag = ({ tag, name, id }) => {
+const HashtagPost = ({ tag, name, id }) => {
   return (
-    <div className="p-1 my-1 ">
+    <div className="p-1 my-1">
       <Link
         to={`/t/${name.replace(/^#+/i, "")}`}
         // to={`/t/${id}`}
@@ -10,11 +10,8 @@ const Hashtag = ({ tag, name, id }) => {
       >
         {name}
       </Link>
-      <p className="text-xs mt-1 ">
-        {tag.post_count} {parseInt(tag.post_count) > 1 ? "Posts" : "Post"}
-      </p>
     </div>
   );
 };
 
-export default Hashtag;
+export default HashtagPost;

@@ -47,7 +47,7 @@ const VolunteerExtra = ({ volunteer, currentUser }) => {
   };
   return (
     <>
-      <div className="flex flex-row mb-4">
+      <div className="flex flex-row  border-b px-4 py-2">
         <div className="mr-2 flex justify-center items-center text-white cursor-pointer focus:outline-none w-10 h-10 bg-red-600 bg-transparent rounded-full">
           <p className="text-lg">J</p>
         </div>

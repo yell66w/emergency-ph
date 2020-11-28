@@ -18,8 +18,14 @@ const Body = ({ currentUser }) => {
     const getAllPosts = async () => {
       setIsLoading(true);
       let posts = [];
-      if (sortedBy === "POPULAR") posts = await _post.getAllPopularPosts();
-      else posts = await _post.getAllPosts();
+      try {
+        posts = await _post.getAllPosts();
+        console.log(posts);
+      } catch (error) {
+        console.log(error);
+      }
+      // if (sortedBy === "POPULAR") posts = await _post.getAllPopularPosts();
+      // else posts = await _post.getAllPosts();
       setPosts(posts);
       setIsLoading(false);
       setPostUpdated(false);
@@ -31,7 +37,7 @@ const Body = ({ currentUser }) => {
 
   return (
     <>
-      <div className="w-3/5  px-4 pt-2">
+      <div className="w-9/12 px-4 pt-2">
         <CreatePost currentUser={currentUser} setShowModal={setShowModal} />
         <SortTab sortedBy={sortedBy} setSortedBy={setSortedBy} />
 
@@ -42,7 +48,14 @@ const Body = ({ currentUser }) => {
             </div>
           ) : (
             posts.map((post) => {
-              return <Post key={post.id} post={post} />;
+              return (
+                <Post
+                  postUpdated={postUpdated}
+                  setPostUpdated={setPostUpdated}
+                  key={post.id}
+                  post={post}
+                />
+              );
             })
           )}
         </div>
