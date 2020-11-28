@@ -29,10 +29,16 @@ EmergencyPH is a web app developed by TEAM CHIHUAHUA for a coding competition (H
 ```bash
 git clone 
 cd hackathon-chihuahua
-cd client & server 
-Install packages with yarn & npm install
-client-> yarn start
-server-> yarn start
+
+//CLIENT
+cd client 
+yarn
+yarn start
+
+//SERVER
+cd server
+npm install
+yarn start
 ```
 
 ## MEMBERS
