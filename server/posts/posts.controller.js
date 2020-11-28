@@ -13,13 +13,10 @@ router.get("/crimes", getAllCrimePosts);
 router.get("/file", savefile);
 router.get("/latest", getAllsortBydatecreated);
 router.get("/completed", getAllByStatus);
+router.get("/popular", getAllPostsByPopularity);
+
 //ilagay mo sa taas ng /:id yung mga endpoints mo kasi yun yung rule
-
 router.get("/:id", getPostById);
-router.get("/popular/upvote", getAllPostsByPopularity);
-// router.get('/lastest', getAllsortBydatecreated);
-// router.get('/completed', getAllByStatus);
-
 router.post("/create", createPost);
 router.put("/:id", updatePost);
 router.delete("/:id", deletePost);
@@ -41,11 +38,11 @@ function getAllsortBydatecreated(req, res, next) {
     .catch((err) => next(err));
 }
 
-function getAllByStatus(req, res, next){
-	postService
-	.getAllByStatus()
-	.then(posts => res.json(posts))
-	.catch(err => next(err));
+function getAllByStatus(req, res, next) {
+  postService
+    .getAllByStatus()
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
 }
 
 function getAllPost(req, res, next) {
@@ -116,8 +113,8 @@ function deleteAllPosts(req, res, next) {
     .catch((err) => next(err));
 }
 
-function savefile(req, res, next){
-    postService
+function savefile(req, res, next) {
+  postService
     .savefile()
     .then(() => res.json({}))
     .catch((err) => next(err));
