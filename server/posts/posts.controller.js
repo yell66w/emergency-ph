@@ -11,9 +11,8 @@ router.get("/fire", getAllFirePosts);
 router.get("/earthquake", getAllEarthquakePosts);
 router.get("/crimes", getAllCrimePosts);
 router.get("/file", savefile);
-
-
-
+router.get("/latest", getAllsortBydatecreated);
+router.get("/completed", getAllByStatus);
 //ilagay mo sa taas ng /:id yung mga endpoints mo kasi yun yung rule
 
 router.get("/:id", getPostById);
@@ -33,6 +32,20 @@ function getAllPostsByPopularity(req, res, next) {
     .getAllPostsByPopularity()
     .then((posts) => res.json(posts))
     .catch((err) => next(err));
+}
+
+function getAllsortBydatecreated(req, res, next) {
+  postService
+    .getAllsortBydatecreated()
+    .then((posts) => res.json(posts))
+    .catch((err) => next(err));
+}
+
+function getAllByStatus(req, res, next){
+	postService
+	.getAllByStatus()
+	.then(posts => res.json(posts))
+	.catch(err => next(err));
 }
 
 function getAllPost(req, res, next) {

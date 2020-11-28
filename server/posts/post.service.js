@@ -1,4 +1,4 @@
-﻿//DITO NIYO ILALAGAY YUNG PINAKA LOGIC TALAGA WALANG ROUTING MGA FUNCTION LANG
+//DITO NIYO ILALAGAY YUNG PINAKA LOGIC TALAGA WALANG ROUTING MGA FUNCTION LANG
 
 const config = require("config.json");
 const jwt = require("jsonwebtoken");
@@ -12,6 +12,8 @@ module.exports = {
   getAllPost,
   getPostById,
   getAllPostsByPopularity,
+  getAllsortBydatecreated,
+  getAllByStatus,
   createPost,
   updatePost,
   deletePost,
@@ -49,6 +51,14 @@ async function getPostById(id) {
 
 async function getAllPostsByPopularity() {
   return await Post.find({}).sort( { upvotes : -1 } );
+}
+
+async function getAllsortBydatecreated(created_date) {
+  return await Post.find({created_date:{$exists:true}}).sort({created_date: -1});
+}
+
+async function getAllByStatus(status) {
+  return await Post.find({status: "RESCUED"});
 }
 
 async function createPost(userParam, userid) {
