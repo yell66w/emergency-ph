@@ -53,7 +53,7 @@ const VolunteerExtra = ({ volunteer, currentUser }) => {
         </div>
         <div className="flex flex-col justify-center">
           <h1 className="font-medium cursor-default">{`${firstName} ${lastName}`}</h1>
-          <p className="text-xs text-gray-300 cursor-default">
+          <p className="text-xs text-gray-500 cursor-default">
             {distance.toFixed(2)} km away
             {/* {address.length > 25 ? address.substring(0, 25) + "..." : address} */}
           </p>
