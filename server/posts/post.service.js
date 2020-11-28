@@ -13,6 +13,7 @@ module.exports = {
   getAllPost,
   getPostById,
   getAllPostsByPopularity,
+  getAllPostsbyQuery,
   getAllsortBydatecreated,
   getAllByStatus,
   createPost,
@@ -58,6 +59,10 @@ async function getPostById(id) {
 
 async function getAllPostsByPopularity() {
   return await Post.find({}).sort({ upvotes: 1 });
+}
+
+async function getAllPostsbyQuery(query, post_description) {
+	return await Post.find({post_description: {'$regex' : '.*' + query + '.*', '$options' : 'i' }});
 }
 
 async function getAllTyphoonByPopularity() {
