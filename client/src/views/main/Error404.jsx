@@ -34,7 +34,7 @@ const Error404 = () => {
           <label className="w-full bg-gray-100 mt-4 flex flex-col items-center justify-center px-4 py-6  text-blue rounded-lg tracking-wide uppercase  cursor-pointer hover:bg-gray-200 hover:text-white">
             <RiImageAddFill size={30} />
             <span className="mt-2 text-base leading-normal">Add a photo</span>
-            <input ref={register} type="file" class="hidden" name="photo" />
+            <input ref={register} type="file" className="hidden" name="photo" />
           </label>
         </div>
         <button type="submit">Submit</button>

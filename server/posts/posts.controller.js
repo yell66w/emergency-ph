@@ -23,12 +23,12 @@ router.get("/latest", getAllsortBydatecreated);
 router.get("/completed", getAllByStatus);
 //ilagay mo sa taas ng /:id yung mga endpoints mo kasi yun yung rule
 
-router.get("/:id", getPostById);
 router.get("/popular/upvote", getAllPostsByPopularity);
 router.put("/popular/upvote/add", addupvote);
 router.put("/popular/upvote/minus", minusupvote);
 // router.get('/lastest', getAllsortBydatecreated);
 // router.get('/completed', getAllByStatus);
+router.get("/:id", getPostById);
 
 router.post("/create", createPost);
 router.put("/:id", updatePost);
