@@ -1,4 +1,4 @@
-//DITO NIYO ILALAGAY YUNG PINAKA LOGIC TALAGA WALANG ROUTING MGA FUNCTION LANG
+﻿//ITO NIYO ILALAGAY YUNG PINAKA LOGIC TALAGA WALANG ROUTING MGA FUNCTION LANG
 
 const config = require("config.json");
 const jwt = require("jsonwebtoken");
@@ -22,7 +22,9 @@ module.exports = {
   getAllFirePosts,
   getAllEarthquakePosts,
   getAllCrimePosts,
-  savefile
+  savefile,
+  addupvote,
+  minusupvote
 };
 
 async function getAllPost() {
@@ -50,7 +52,7 @@ async function getPostById(id) {
 }
 
 async function getAllPostsByPopularity() {
-  return await Post.find({}).sort( { upvotes : -1 } );
+  return await Post.find({}).sort( { upvotes : 1 } );
 }
 
 async function getAllsortBydatecreated(created_date) {
@@ -103,6 +105,30 @@ async function createPost(userParam, userid) {
   await post.save();
 }
 
+async function addupvote(id) {
+  const post = await Post.findById(id);
+  // validate
+  if (!post) throw "Post not found";
+  const obj = {
+    upvotes: post.upvotes + 1
+  };
+  Object.assign(post, obj);
+
+  await post.save();
+}
+async function minusupvote(id) {
+  const post = await Post.findById(id);
+  // validate
+  if (!post) throw "Post not found";
+  const obj = {
+    upvotes: post.upvotes - 1
+  };
+
+  Object.assign(post, obj);
+
+  await post.save();
+}
+
 async function updatePost(id, userParam) {
   const post = await Post.findById(id);
 
@@ -121,7 +147,7 @@ async function deletePost(id) {
 async function deleteAllPosts() {
   await Post.remove({});
 }
-savefile
+
 async function savefile(req) {
   if (req.files === null) {
     return { msg: 'No file uploaded' };
