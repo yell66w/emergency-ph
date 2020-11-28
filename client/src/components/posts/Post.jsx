@@ -97,7 +97,7 @@ const Post = ({ post }) => {
       <div className="mt-3 px-4">
         <p>{post_description}</p>
       </div>
-      <div className="mt-3 flex flex-row px-4">
+      <div className="mt-3 flex flex-row px-4 flex-wrap">
         {tags.map((tag) => {
           return <HashtagPost key={`${user_id}${tag}`} name={tag} />;
         })}
