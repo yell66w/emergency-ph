@@ -21,6 +21,7 @@ const Body = ({ currentUser }) => {
       if (sortedBy === "POPULAR") posts = await _post.getAllPopularPosts();
       else posts = await _post.getAllPosts();
       setPosts(posts);
+      console.log(posts);
       setIsLoading(false);
       setPostUpdated(false);
     };

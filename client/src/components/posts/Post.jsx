@@ -3,7 +3,7 @@ import HashtagPost from "../misc/HashtagPost";
 import { AiFillNotification } from "react-icons/ai";
 import { PostService } from "../../services/PostService";
 
-const Post = ({ post, setPostUpdated }) => {
+const Post = ({ post }) => {
   const {
     user_id,
     user_first_name,
@@ -32,6 +32,7 @@ const Post = ({ post, setPostUpdated }) => {
       setIsUpvoteClicked(false);
     }
   }, [isUpvoteClicked]);
+
   useEffect(() => {
     const getPost = async () => {
       const post = await _post.getUserPostRelationship(id);
