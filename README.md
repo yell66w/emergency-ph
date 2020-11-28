@@ -5,7 +5,7 @@ EmergencyPH is a web app developed by TEAM CHIHUAHUA for a coding competition (H
 ## MISSION
 1. To create a community of volunteers.
 2. To help victims of typhoons,earthquake,fire,crime, etc.
-3. To spread awareness on natural disasters and crime.
+3. To spread awareness on natural disasters and crimes.
 4. To help rescue teams easily pinpoint the location of victims.
 5. To encourage other people to help.
 
