@@ -14,7 +14,6 @@ import Error404 from "./Error404";
 import FireBody from "./FireBody";
 import QuakeBody from "./QuakeBody";
 import TagsBody from "./TagsBody";
-import Maps from "./Maps";
 
 const Main = ({ setIsAuth, setCheckingUser, currentUser, setCurrentUser }) => {
   const _auth = new AuthService();
