@@ -1,5 +1,5 @@
 ## EMERGENCY PH
-EmergencyPH is a web app developed by TEAM CHIHUAHUA for a coding competition (Hackathon/Hackfest 2020 - DSC Loyola). The app wants to raise awareness on natural disasters (typhoon,earthquake,fire) and crime (kidnapping,drug dealers, covid19 violators). It is a dedicated platform for people who are in danger, volunteers, and rescue teams. 
+EmergencyPH is a web app developed by TEAM CHIHUAHUA for a coding competition (Hackathon/Hackfest 2020 - DSC Loyola). The app's mission is to raise awareness on natural disasters (typhoon, earthquake, fire) and crime (kidnapping, drug dealers, covid19 violators). It is a dedicated platform for people who are in danger, volunteers, and rescue teams.
 
 
 ## MISSION
